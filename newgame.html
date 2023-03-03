@@ -1,0 +1,295 @@
+<html lang="en" class="" dir="ltr"><head>
+
+    <meta charset="UTF-8">
+    <title>Thanatos Crisis</title>
+  
+    <meta name="robots" content="noindex">
+  
+    <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
+    <link rel="mask-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111">
+    <link rel="canonical" href="https://codepen.io/helas_/pen/yLyjgLB">
+  
+    
+    
+  
+    <style id="INLINE_PEN_STYLESHEET_ID">
+      * {
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    background-color: #121212;
+  }
+  
+  #wrapper {
+    margin: 0 auto;
+    background-color: #121212;
+    width: 55vw;
+    height: 50vh;
+    max-width: 450px;
+    min-height: 700px;
+    opacity: 0;
+    animation: fade 3s;
+    animation-fill-mode: forwards;
+  }
+  
+  .content {
+    margin: 0 auto;
+    color: white;
+    height: 100%;
+    width: 100%;
+  }
+  
+  #content {
+    visibility: visible;
+    opacity: 1;
+    transition: 2s;
+  }
+  
+  #pageTitle {
+    font-size: 1.7em;
+    font-family: "Sintony";
+    text-align: center;
+    padding: 20px;
+    text-shadow: 1px 1px 1px gray;
+  }
+  
+  #characterTitle {
+    font-size: 2.2em;
+    text-shadow: 2px 2px 2px gray;
+  }
+  
+  header {
+    width: 100%;
+    height: 20%;
+    margin-bottom: 5px;
+    margin-top: 5px;
+  }
+  
+  .classSelection {
+    width: 100%;
+    height: 80%;
+    margin-top: 0;
+    visibility: visible;
+    opacity: 1;
+    transition: 500ms;
+  }
+  
+  .charClassOption {
+    box-sizing: border-box;
+    padding: 10px;
+    width: auto;
+    height: 25%;
+    transition: 400ms;
+  }
+  
+  .charClassImage {
+    width: 30%;
+    float: left;
+    position: relative;
+    bottom: 5%;
+  }
+  
+  .charClassName {
+    position: relative;
+    left: 10px;
+    top: 10px;
+    margin: 0 auto;
+    font-size: 1.8em;
+    font-family: Gayathri;
+    text-shadow: 1px 1px 1px gray;
+  }
+  
+  .charClassDesc {
+    position: relative;
+    margin: 10px 9px 5px 5px;
+    left: 10px;
+    top: 10px;
+    font-family: Montserrat;
+    font-size: .8em;
+  }
+  
+  #new_republic:hover {
+    background-color: #7e3b00;
+    border: 2px solid #b76d19;
+    height: 25%;
+    transform: scale(1.1);
+  }
+  
+  #tar_kuuraen:hover {
+    background-color: #353505;
+    border: 2px solid #c7c236;
+    height: 25%;
+    transform: scale(1.1);
+  }
+  
+  #enklima_force:hover {
+    background-color: #450336;
+    border: 2px solid #a91e90;
+    height: 25%;
+    transform: scale(1.1);
+  }
+  
+  #alert {
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  a {
+    text-decoration: none;
+    cursor: pointer;
+    color: inherit;
+  }
+  
+  #beginGameEntry {
+    width: 90%;
+    height: 70%;
+    background-color: #121212;
+    visibility: hidden;
+    opacity: 0;
+    position: relative;
+    margin: 0 auto;
+    bottom: 80%;
+    transition: 2s;
+    padding: 10px;
+  }
+  
+  #beginGameEntry p {
+    font-family: Gayathri;
+    font-size: 4em;
+    text-align: center;
+    width: 100%;
+  }
+  
+  #beginGameEntry img {
+    width: 100%;
+    margin: 0 auto;
+  }
+  
+  @keyframes fade {
+    0% {opacity: 0;}
+    87% {opacity: 0.87;}
+  }
+  
+  .nameInput {
+    margin: 10px auto;
+    text-align: center;
+  }
+  
+  label {
+    font-family: Gayathri;
+    font-size: 2em;
+  }
+  
+  input[type="text"] {
+    width: 50%;
+    border: 3px solid gold;
+    background-color: #EEEEEE;
+    font-size: 2em;
+    font-weight: bold;
+    text-align: center;
+    font-family: Montserrat;
+  }
+  
+  button {
+    box-sizing: border-box;
+    background: none;
+    border: none;
+    color: white;
+    font-family: "Sintony";
+    font-size: 1.3em;
+    margin-top: 7px;
+    position: relative;
+  }
+  
+  button:hover {
+    border: 2px solid gold;
+    top: -2px;
+  }
+  
+  button:active {
+    border: 2px solid blue;
+    color: blue;
+    top: -2px;
+  }
+    .bg {
+    /* The image used */
+    background-image: url("images/banner2.jpg");
+
+    /* Full height */
+    height: 100%;
+
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: repeat;
+    background-size: cover;
+    }
+    </style>
+    
+  <script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeConsoleRunner-6bce046e7128ddf9391ccf7acbecbf7ce0cbd7b6defbeb2e217a867f51485d25.js"></script>
+  <script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeRefreshCSS-44fe83e49b63affec96918c9af88c0d80b209a862cf87ac46bc933074b8c557d.js"></script>
+  <script src="https://cpwebassets.codepen.io/assets/editor/iframe/iframeRuntimeErrors-4f205f2c14e769b448bcf477de2938c681660d5038bc464e3700256713ebe261.js"></script>
+  </head>
+  
+  <body style="overflow: hidden;" class="bg" id="module">
+    
+      <meta charset="utf-8">
+      <title>Animation</title>
+  <!--     <link rel="stylesheet" href="./css/styles.css"> -->
+      <link href="https://fonts.googleapis.com/css?family=Bangers|Gayathri|Kumar+One|Montserrat|Sintony&amp;display=swap" rel="stylesheet">
+    
+    
+      <div id="wrapper" style="opacity: 87%">
+        <div class="content" id="content">
+          <header>
+            <p id="pageTitle">CHOOSE YOUR<br><span id="characterTitle">Faction</span></p>
+          </header>
+          <div class="classSelection" id="classSelection">
+            <a href="#" onclick="popupEntry()">
+              <div class="charClassOption" id="new_republic">
+                <img src="images/faction_logos/new_republic.png" alt="classImage" class="charClassImage">
+                <p class="charClassName">New Republic (Easy)</p>
+                <p class="charClassDesc">Big Ol Faction with strong ties between empires, 2 enemy sectors.</p>
+              </div>
+            </a>
+            <a href="#" onclick="popupEntry()">
+              <div class="charClassOption" id="tar_kuuraen">
+                <img src="images/faction_logos/tar_kuuraen.png" alt="classImage" class="charClassImage">
+                <p class="charClassName">Tar Kuuraen (Medium)</p>
+                <p class="charClassDesc">A medium faction, only 1 friendly sector.</p>
+              </div>
+            </a>
+            <a href="#" onclick="popupEntry()">
+              <div class="charClassOption" id="enklima_force">
+                <img src="images/faction_logos/enklima_force.png" alt="classImage" class="charClassImage">
+                <p class="charClassName">Enklima Force (Hard)</p>
+                <p class="charClassDesc">A criminal faction, no friendly sectors; other members of this faction are less than trustworthy, but maybe you will find honor among theives?</p>
+              </div>
+            </a>
+          </div>
+          <div id="beginGameEntry">
+            <div class="nameInput">
+              <label>Enter Spaceship Name</label><br>
+              <input type="text"><br>
+              <button onclick="fadeAll()">Begin</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+    <script type="text/javascript" src="js/newgame.js"></script>
+  </body>
+</html>
