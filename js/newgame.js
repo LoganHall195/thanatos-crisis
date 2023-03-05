@@ -16,6 +16,15 @@ function popupEntry() {
     content.style.visibility = 'hidden';
   }
 
+  function toggleBegin(){
+    if(document.getElementById("inputName").value!==""){
+      window.location.href='starmap.html'
+    }
+    else{
+      alert("You must choose a name!")
+    }
+  }
+
   const el = document.querySelector("#module");
   el.addEventListener("mousemove", (e) => {
     el.style.backgroundPositionX = -0.005*e.offsetX + "px";

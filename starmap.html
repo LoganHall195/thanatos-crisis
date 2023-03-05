@@ -1,0 +1,31 @@
+<html lang="en" class="" dir="ltr"><head>
+    <head>
+        <title>Thanatos Crisis</title>
+        <!-- Meta -->
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+        <!-- CSS -->
+        <link rel="stylesheet" href="css/bootstrap.min.css">
+        <link rel="stylesheet" href="css/starmap.css">
+        <!-- Scripts -->
+        <script src="js/jquery.min.js"></script>
+    </head>
+    <body style="overflow: hidden;">
+        <!-- Page Loader -->
+        <div class="page-loader">
+            <div class="spinner"></div>
+            <div class="txt">Loading<br>Space</div>
+        </div>
+        <!-- Body -->
+
+        <!-- Scripts -->
+        <script> // Loader Script
+            $(window).on('load',function(){
+                setTimeout(function(){
+                $('.page-loader').fadeOut('slow');
+                },3500);
+            });
+        </script>
+    </body>
+
+</html>
