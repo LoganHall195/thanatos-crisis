@@ -422,7 +422,13 @@
             </div>
         </div>
 
-        <div id="event">
+        <div id="inventory_system">
+            <div id = "inventory" style="background-color: aqua; 
+            width: 100px; height: 100px; position: absolute; 
+            top: 20px; left: 5%; border-radius: 20%;">
+
+
+            </div>
 
         </div>
         <!-- Scripts -->
@@ -432,6 +438,16 @@
                 $('.page-loader').fadeOut('slow');
                 },35); //change back to 3500 before release
             });
+        </script>
+        <script> // Inventory
+            let inventory = [
+                {
+                    name: "Shield Recharge",
+                    description: "Recharge your shields if they are depleted",
+                    type: "Ship Mod",
+                    quantity: 1,
+                },
+            ];
         </script>
     </body>
 </html>
