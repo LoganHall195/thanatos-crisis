@@ -10,7 +10,7 @@
         <!-- Scripts -->
         <script src="js/jquery.min.js"></script>
     </head>
-    <body style="overflow: hidden;">
+    <body style="overflow: hidden;" >
         <!-- Page Loader -->
         <div class="page-loader">
             <div class="spinner"></div>
@@ -21,342 +21,401 @@
             <source src="images/star_map.mp4" type="video/mp4">
         </video>
         <!-- Body -->
-        <div id="starmap"> 
-            <div id="sun" style="position: absolute; top: 1%; left: 1%;">
+        <div id="highways">
+            <div id="Aslan_Seidon_Line"></div>
+            <div id="Aslan_Thyrmae_Line"></div>
+            <div id="Aslan_KG-348_Line"></div>
+            <div id="Thyrmae_Kaelda_Line"></div>
+            <div id="Caema_Kaelda_Line"></div>
+            <div id="Caema_Serenity_Line"></div>
+            <div id="Caema_Bioholm_Line"></div>
+            <div id="Starholm_Bioholm_Line"></div>
+            <div id="Starholm_Hymera_Line"></div>
+            <div id="Valera_Hymera_Line"></div>
+            <div id="Valera_Seidon_Line"></div>
+            <div id="Valera_Crysholm_Line"></div>
+            <div id="Lumera_Crysholm_Line"></div>
+            <div id="Lumera_Caema_Line"></div>
+            <div id="Serenity_Forge_Line"></div>
+            <div id="New Hope_Forge_Line"></div>
+            <div id="Serenity_Liberty_Line"></div>
+            <div id="XT-3_XT-0_Line"></div>
+            <div id="Haven_XT-0_Line"></div>
+            <div id="XT-5_XT-0_Line"></div>
+            <div id="Haven_Drybone_Line"></div>
+            <div id="Drybone_Sky Ark_Line"></div>
+            <div id="Liberty_Sky Ark_Line"></div>
+            <div id="Sigil_Sky Ark_Line"></div>
+            <div id="Sigil_Lumera_Line"></div>
+            <div id="Sigil_Thedus_Line"></div>
+            <div id="Sigil_Betelgeuse_Line"></div>
+            <div id="XT-5_Ionus_Line"></div>
+            <div id="Eos_Ionus_Line"></div>
+            <div id="XT-5_Theta-1C_Line"></div>
+            <div id="New Hope_Haven_Line"></div>
+            <div id="Thedus_Betelgeuse_Line"></div>
+            <div id="Thedus_Cerulan_Line"></div>
+            <div id="Acheron_Cerulan_Line"></div>
+            <div id="Acheron_Irulan_Line"></div>
+            <div id="Cigni_Irulan_Line"></div>
+            <div id="Cigni_KG-348_Line"></div>
+            <div id="Cigni_Neo Eden_Line"></div>
+            <div id="LV-223_Neo Eden_Line"></div>
+            <div id="Cigni_Providence_Line"></div>
+            <div id="Caladan_Providence_Line"></div>
+            <div id="LV-178_Providence_Line"></div>
+            <div id="LV-178_LV-223_Line"></div>
+            <div id="Thedus_LV-223_Line"></div>
+            <div id="Betelgeuse_Alnitak_Line"></div>
+            <div id="Alnilam_Alnitak_Line"></div>
+            <div id="Betelgeuse_Meissa_Line"></div>
+            <div id="Rigel_Meissa_Line"></div>
+            <div id="Rigel_Fury-161_Line"></div>
+            <div id="Fury-161_Theta-1B_Line"></div>
+            <div id="Rigel_Theta-1E_Line"></div>
+            <div id="Hatsya_Theta-1E_Line"></div>
+            <div id="Hatsya_Theta-1B_Line"></div>
+            <div id="Alnilam_Theta-1C_Line"></div>
+            <div id="Alnilam_Mintaka_Line"></div>
+            <div id="Omni Prime_Mintaka_Line"></div>
+            <div id="Omni Prime_Meissa_Line"></div>
+            <div id="Hatsya_Mintaka_Line"></div>
+        </div>
+
+        <div id="starmap">
+            <div id="sun" style="position: absolute; top: 1%; left: 1%;" >
                 <image src="images/MillionthVector/Planets/sun.png" style="
                     height: 190px;
                 "/>
             </div>
-            <div id="Aslan" style="position: absolute; top: 50%; left: 3%;">
+            <div id="Aslan" style="position: absolute; top: 50%; left: 3%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p1shaded.png" style="
-                    border-radius:100%;
-                    border:#1c9701 thick solid;
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Aslan</p1>
+                <p1 style="color:white;" >Aslan</p1>
             </div>
-            <div id="KG-348" style="position: absolute; top: 64%; left: 4%;">
+            <div id="KG-348" style="position: absolute; top: 64%; left: 4%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p2shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">KG-348</p1>
+                <p1 style="color:white;" >KG-348</p1>
             </div>
-            <div id="Thyrmae" style="position: absolute; top: 20%; left: 12%;">
+            <div id="Thyrmae" style="position: absolute; top: 20%; left: 12%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p3shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Thyrmae</p1>
+                <p1 style="color:white;" >Thyrmae</p1>
             </div>
-            <div id="Seidon" style="position: absolute; top: 48%; left: 12%;">
+            <div id="Seidon" style="position: absolute; top: 48%; left: 12%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p6shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Seidon</p1>
+                <p1 style="color:white;" >Seidon</p1>
             </div>
-            <div id="Hymera" style="position: absolute; top: 31%; left: 18%;">
+            <div id="Hymera" style="position: absolute; top: 31%; left: 18%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p5shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Hymera</p1>
+                <p1 style="color:white;" >Hymera</p1>
             </div>
-            <div id="Starholm" style="position: absolute; top: 20%; left: 27%;">
+            <div id="Starholm" style="position: absolute; top: 20%; left: 27%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p7shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Starholm</p1>
+                <p1 style="color:white;" >Starholm</p1>
             </div>
-            <div id="Kaelda" style="position: absolute; top: 5%; left: 32%;">
+            <div id="Kaelda" style="position: absolute; top: 5%; left: 32%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p10shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Kaelda</p1>
+                <p1 style="color:white;" >Kaelda</p1>
             </div>
-            <div id="Bioholm" style="position: absolute; top: 23%; left: 37%;">
+            <div id="Bioholm" style="position: absolute; top: 23%; left: 37%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p9shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Bioholm</p1>
+                <p1 style="color:white;" >Bioholm</p1>
             </div>
-            <div id="Caema" style="position: absolute; top: 10%; left: 42%;">
+            <div id="Caema" style="position: absolute; top: 10%; left: 42%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p8shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Caema</p1>
+                <p1 style="color:white;" >Caema</p1>
             </div>
-            <div id="Lumera" style="position: absolute; top: 34%; left: 46%;">
+            <div id="Lumera" style="position: absolute; top: 34%; left: 46%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p1shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Lumera</p1>
+                <p1 style="color:white;" >Lumera</p1>
             </div>
-            <div id="Valera" style="position: absolute; top: 43%; left: 22%;">
+            <div id="Valera" style="position: absolute; top: 43%; left: 22%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p8shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Valera</p1>
+                <p1 style="color:white;" >Valera</p1>
             </div>
-            <div id="Crysholm" style="position: absolute; top: 46%; left: 35%;">
+            <div id="Crysholm" style="position: absolute; top: 46%; left: 35%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p2shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Crysholm</p1>
+                <p1 style="color:white;" >Crysholm</p1>
             </div>
-            <div id="Caladan" style="position: absolute; top: 90%; left: 6%;">
+            <div id="Caladan" style="position: absolute; top: 90%; left: 6%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p4shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Caladan</p1>
+                <p1 style="color:white;" >Caladan</p1>
             </div>
-            <div id="Cigni" style="position: absolute; top: 70%; left: 10%;">
+            <div id="Cigni" style="position: absolute; top: 70%; left: 10%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p3shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Cigni</p1>
+                <p1 style="color:white;" >Cigni</p1>
             </div>
-            <div id="Irulan" style="position: absolute; top: 60%; left: 17%;">
+            <div id="Irulan" style="position: absolute; top: 60%; left: 17%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/largeredplanet.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Irulan</p1>
+                <p1 style="color:white;" >Irulan</p1>
             </div>
-            <div id="Acheron" style="position: absolute; top: 65%; left: 26%;">
+            <div id="Acheron" style="position: absolute; top: 65%; left: 26%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p1shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Acheron</p1>
+                <p1 style="color:white;" >Acheron</p1>
             </div>
-            <div id="Providence" style="position: absolute; top: 82%; left: 14%;">
+            <div id="Providence" style="position: absolute; top: 82%; left: 14%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p5shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Providence</p1>
+                <p1 style="color:white;" >Providence</p1>
             </div>
-            <div id="Neo Eden" style="position: absolute; top: 71%; left: 19%;">
+            <div id="Neo Eden" style="position: absolute; top: 71%; left: 19%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p9shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Neo Eden</p1>
+                <p1 style="color:white;" >Neo Eden</p1>
             </div>
-            <div id="LV-178" style="position: absolute; top: 89%; left: 27%;">
+            <div id="LV-178" style="position: absolute; top: 89%; left: 27%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p2shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">LV-178</p1>
+                <p1 style="color:white;" >LV-178</p1>
             </div>
-            <div id="LV-223" style="position: absolute; top: 80%; left: 32%;">
+            <div id="LV-223" style="position: absolute; top: 80%; left: 32%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p8shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">LV-223</p1>
+                <p1 style="color:white;" >LV-223</p1>
             </div>
-            <div id="Cerulan" style="position: absolute; top: 70%; left: 35%;">
+            <div id="Cerulan" style="position: absolute; top: 70%; left: 35%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p10shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Cerulan</p1>
+                <p1 style="color:white;" >Cerulan</p1>
             </div>
-            <div id="Thedus" style="position: absolute; top: 71%; left: 45%;">
+            <div id="Thedus" style="position: absolute; top: 71%; left: 45%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/largegreenplanet.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Thedus</p1>
+                <p1 style="color:white;" >Thedus</p1>
             </div>
-            <div id="Sigil" style="position: absolute; top: 50%; left: 50%;">
+            <div id="Sigil" style="position: absolute; top: 50%; left: 50%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/white_sun.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Sigil</p1>
+                <p1 style="color:white;" >Sigil</p1>
             </div>
-            <div id="Eos" style="position: absolute; top: 5%; left: 90%;">
+            <div id="Eos" style="position: absolute; top: 5%; left: 90%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p5shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Eos</p1>
+                <p1 style="color:white;" >Eos</p1>
             </div>
-            <div id="Ionus" style="position: absolute; top: 17%; left: 95%;">
+            <div id="Ionus" style="position: absolute; top: 17%; left: 95%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p4shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Ionus</p1>
+                <p1 style="color:white;" >Ionus</p1>
             </div>
-            <div id="XT-5" style="position: absolute; top: 28%; left: 92%;">
+            <div id="XT-5" style="position: absolute; top: 28%; left: 92%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p3shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">XT-5</p1>
+                <p1 style="color:white;" >XT-5</p1>
             </div>
-            <div id="Theta-1B" style="position: absolute; top: 90%; left: 87%;">
+            <div id="Theta-1B" style="position: absolute; top: 90%; left: 87%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p1shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Theta-1B</p1>
+                <p1 style="color:white;" >Theta-1B</p1>
             </div>
-            <div id="Hatsya" style="position: absolute; top: 77%; left: 94%;">
+            <div id="Hatsya" style="position: absolute; top: 77%; left: 94%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p9shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Hatsya</p1>
+                <p1 style="color:white;" >Hatsya</p1>
             </div>
-            <div id="Mintaka" style="position: absolute; top: 57%; left: 95%;">
+            <div id="Mintaka" style="position: absolute; top: 57%; left: 95%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p1shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Mintaka</p1>
+                <p1 style="color:white;" >Mintaka</p1>
             </div>
-            <div id="Theta-1C" style="position: absolute; top: 45%; left: 90%;">
+            <div id="Theta-1C" style="position: absolute; top: 45%; left: 90%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p10shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Theta-1C</p1>
+                <p1 style="color:white;" >Theta-1C</p1>
             </div>
-            <div id="Rigel" style="position: absolute; top: 80%; left: 80%;">
+            <div id="Rigel" style="position: absolute; top: 80%; left: 80%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p6shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Rigel</p1>
+                <p1 style="color:white;" >Rigel</p1>
             </div>
-            <div id="Fury-161" style="position: absolute; top: 91.5%; left: 75%;">
+            <div id="Fury-161" style="position: absolute; top: 91.5%; left: 75%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p3shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Fury-161</p1>
+                <p1 style="color:white;" >Fury-161</p1>
             </div>
-            <div id="Meissa" style="position: absolute; top: 74%; left: 70%;">
+            <div id="Meissa" style="position: absolute; top: 74%; left: 70%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p1shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Meissa</p1>
+                <p1 style="color:white;" >Meissa</p1>
             </div>
-            <div id="Betelgeuse" style="position: absolute; top: 60%; left: 58%;">
+            <div id="Betelgeuse" style="position: absolute; top: 60%; left: 58%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p4shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Betelgeuse</p1>
+                <p1 style="color:white;" >Betelgeuse</p1>
             </div>
-            <div id="Theta-1E" style="position: absolute; top: 70%; left: 86%;">
+            <div id="Theta-1E" style="position: absolute; top: 70%; left: 86%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p8shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Theta-1E</p1>
+                <p1 style="color:white;" >Theta-1E</p1>
             </div>
-            <div id="Omni Prime" style="position: absolute; top: 60%; left: 81.5%;">
+            <div id="Omni Prime" style="position: absolute; top: 60%; left: 81.5%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p7shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Omni Prime</p1>
+                <p1 style="color:white;" >Omni Prime</p1>
             </div>
-            <div id="Alnilam" style="position: absolute; top: 50%; left: 77%;">
+            <div id="Alnilam" style="position: absolute; top: 50%; left: 77%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p5shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Alnilam</p1>
+                <p1 style="color:white;" >Alnilam</p1>
             </div>
-            <div id="Alnitak" style="position: absolute; top: 50%; left: 68%;">
+            <div id="Alnitak" style="position: absolute; top: 50%; left: 68%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p9shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Alnitak</p1>
+                <p1 style="color:white;" >Alnitak</p1>
             </div>
-            <div id="Serenity" style="position: absolute; top: 20%; left: 50%;">
+            <div id="Serenity" style="position: absolute; top: 20%; left: 50%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p7shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Serenity</p1>
+                <p1 style="color:white;" >Serenity</p1>
             </div>
-            <div id="Forge" style="position: absolute; top: 5%; left: 60%;">
+            <div id="Forge" style="position: absolute; top: 5%; left: 60%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p6shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Forge</p1>
+                <p1 style="color:white;" >Forge</p1>
             </div>
-            <div id="New Hope" style="position: absolute; top: 10%; left: 70%;">
+            <div id="New Hope" style="position: absolute; top: 10%; left: 70%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p2shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">New Hope</p1>
+                <p1 style="color:white;" >New Hope</p1>
             </div>
-            <div id="Liberty" style="position: absolute; top: 23%; left: 60%;">
+            <div id="Liberty" style="position: absolute; top: 23%; left: 60%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p9shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Liberty</p1>
+                <p1 style="color:white;" >Liberty</p1>
             </div>
-            <div id="Sky Ark" style="position: absolute; top: 40%; left: 57%;">
+            <div id="Sky Ark" style="position: absolute; top: 40%; left: 57%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p6shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Sky Ark</p1>
+                <p1 style="color:white;" >Sky Ark</p1>
             </div>
-            <div id="Drybone" style="position: absolute; top: 35%; left: 67%;">
+            <div id="Drybone" style="position: absolute; top: 35%; left: 67%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p5shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Drybone</p1>
+                <p1 style="color:white;" >Drybone</p1>
             </div>
-            <div id="Haven" style="position: absolute; top: 26%; left: 73%;">
+            <div id="Haven" style="position: absolute; top: 26%; left: 73%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p7shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">Haven</p1>
+                <p1 style="color:white;" >Haven</p1>
             </div>
-            <div id="XT-0" style="position: absolute; top: 34%; left: 81%;">
+            <div id="XT-0" style="position: absolute; top: 34%; left: 81%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p8shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">XT-0</p1>
+                <p1 style="color:white;" >XT-0</p1>
             </div>
-            <div id="XT-3" style="position: absolute; top: 18%; left: 80%;">
+            <div id="XT-3" style="position: absolute; top: 18%; left: 80%;" onclick="travelTo(this.id)">
                 <image src="images/MillionthVector/Planets/p1shaded.png" style="
                     height: 60px;
                 "/>
                 <br>
-                <p1 style="color:white;">XT-3</p1>
+                <p1 style="color:white;" >XT-3</p1>
             </div>
         </div>
 
@@ -368,6 +427,143 @@
                 $('.page-loader').fadeOut('slow');
                 },35); //change back to 3500 before release
             });
+        </script>
+        <script> // Highway Drawing
+            $(window).on('load', function() {
+                const highways = $("#highways");
+
+                highways.children().each(function() {
+                    const childId = $(this).attr('id');
+
+                    const firstVar = childId.substring(0, childId.indexOf('_'));
+                    const secondVar = childId.substring(childId.indexOf('_') + 1, childId.lastIndexOf('_'));
+                    const thirdVar = childId;
+
+                    adjustLine(firstVar, secondVar, thirdVar);
+                });
+
+                /* Temp Start Aslan */
+                document.getElementById("Aslan").children[0].style.borderRadius="100%";
+                document.getElementById("Aslan").children[0].style.outline="#1c9701 thick solid";
+                sessionStorage.setItem("currentPlanet", "Aslan");
+                showLines();
+                /********************/
+            });
+            // Hide Lines
+            function hideLines(){
+                const highways = document.getElementById("highways");
+
+                const specifiedString = sessionStorage.getItem("currentPlanet");
+                const childElements = highways.querySelectorAll('[id]');
+
+                for (let i = 0; i < childElements.length; i++) {
+                    const childId = childElements[i].id;
+                    if (childId.includes(specifiedString)) {
+                    childElements[i].style.opacity = 0.15;
+                    }
+                }
+            }
+            // Show Close Lines
+            function showLines(){
+                const highways = document.getElementById("highways");
+
+                const specifiedString = sessionStorage.getItem("currentPlanet");
+                const childElements = highways.querySelectorAll('[id]');
+
+                for (let i = 0; i < childElements.length; i++) {
+                    const childId = childElements[i].id;
+                    if (childId.includes(specifiedString)) {
+                    childElements[i].style.opacity = 0.5;
+                    }
+                }
+            }
+            // Create Lines (https://jsfiddle.net/rdamasceno/o3Lroapa/5/)
+            function adjustLine(from, to, line){
+                line = document.getElementById(line);
+                from = document.getElementById(from);
+                to = document.getElementById(to);
+
+                line.style.position="absolute";
+                line.style.width="2px";
+                line.style.marginTop="-1px";
+                line.style.backgroundColor="white";
+                line.style.opacity = "0.15";
+                
+                var fT = from.offsetTop  + from.offsetHeight/2.5;
+                var tT = to.offsetTop 	 + to.offsetHeight/2.5;
+                var fL = from.offsetLeft + from.offsetWidth/2.3;
+                var tL = to.offsetLeft 	 + to.offsetWidth/2.3;
+
+                var CA   = Math.abs(tT - fT);
+                var CO   = Math.abs(tL - fL);
+                var H    = Math.sqrt(CA*CA + CO*CO);
+                var ANG  = 180 / Math.PI * Math.acos( CA/H );
+
+                if(tT > fT){
+                    var top  = (tT-fT)/2 + fT;
+                }else{
+                    var top  = (fT-tT)/2 + tT;
+                }
+                if(tL > fL){
+                    var left = (tL-fL)/2 + fL;
+                }else{
+                    var left = (fL-tL)/2 + tL;
+                }
+
+                if(( fT < tT && fL < tL) || ( tT < fT && tL < fL) || (fT > tT && fL > tL) || (tT > fT && tL > fL)){
+                    ANG *= -1;
+                }
+                top-= H/2;
+
+                line.style["-webkit-transform"] = 'rotate('+ ANG +'deg)';
+                line.style["-moz-transform"] = 'rotate('+ ANG +'deg)';
+                line.style["-ms-transform"] = 'rotate('+ ANG +'deg)';
+                line.style["-o-transform"] = 'rotate('+ ANG +'deg)';
+                line.style["-transform"] = 'rotate('+ ANG +'deg)';
+                line.style.top    = top+'px';
+                line.style.left   = left+'px';
+                line.style.height = H + 'px';
+            }
+        </script>
+        <script> // Planet Travel
+            // Travel
+            function travelTo(planet) {
+                // Test: Is Neighbor Planet?
+                const hasMatchingLocations = checkHighwayLocations(planet, sessionStorage.getItem("currentPlanet"));
+                if (planet==sessionStorage.getItem("currentPlanet")){
+                    // Probably put interaction here
+                    console.log("You are already there"); 
+                } else if (hasMatchingLocations){
+                    console.log("Traveling to "+ planet +"!");
+                    // Clear Last Planet
+                    let lastPlanet = sessionStorage.getItem("currentPlanet");
+                    document.getElementById(lastPlanet).children[0].style.borderRadius="";
+                    document.getElementById(lastPlanet).children[0].style.outline="";
+                    hideLines();
+                    // Set New Planet
+                    document.getElementById(planet).children[0].style.borderRadius="100%";
+                    document.getElementById(planet).children[0].style.outline="#1c9701 thick solid";
+                    sessionStorage.setItem("currentPlanet", planet);
+                    showLines();
+                } else {
+                    console.log("Cannot travel to non-neighboring planets");
+                }
+            }
+            // Check if neighboring planet
+            function checkHighwayLocations(location1, location2) {
+                const highways = document.getElementById("highways");
+
+                const childElements = highways.children;
+
+                for (let i = 0; i < childElements.length; i++) {
+                    const childId = childElements[i].id;
+                    if (childId.includes(location1) && childId.includes(location2)) {
+                    return true;
+                    }
+                }
+
+                return false;
+            }
         </script>
     </body>
 
