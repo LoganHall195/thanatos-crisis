@@ -518,20 +518,29 @@
                 for (let i = 0; i < childElements.length; i++) {
                 childElements[i].style.outline = '';
                 }
+
+            
                 descDisplay.textContent = ""
                 document.getElementById(id).style.outline = '2px solid green'
-                console.log(document.getElementById(id))
-                console.log(document.getElementById(document.getElementById(id).querySelector('img').alt))
+                //console.log(document.getElementById(id))
+                const ident = document.getElementById(document.getElementById(id).querySelector('img').alt)
+                console.log(ident) 
+                
                 const h3 = document.createElement('h3');
+                console.log("h3: " + h3);
                 h3.style = "color: white"
                 h3.textContent=document.getElementById(id).querySelector('img').alt;
-                document.getElementById("descDisplay").appendChild(h3)
+                document.getElementById("descDisplay").appendChild(h3);
+
+
+                // Item Description
                 const itemName = h3.textContent
                 console.log(itemName);
                 const result = itemList.find(item => item.name === itemName);
-                console.log(result.description);
+                console.log(result.description)
+                console.log(result.type)
                 const descP = document.createElement("p");
-                descP.textContent = result.description;
+                descP.textContent = "Type: " + result.type + "\n" + result.description;
                 descP.style = "color: white"
                 document.getElementById("descDisplay").appendChild(descP)
                 
