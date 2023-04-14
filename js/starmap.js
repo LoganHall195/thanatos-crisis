@@ -107,12 +107,10 @@
                 console.log("Traveling to "+ planet +"!");
                 // Clear Last Planet
                 let lastPlanet = sessionStorage.getItem("currentPlanet");
-                document.getElementById(lastPlanet).children[0].style.borderRadius="";
                 document.getElementById(lastPlanet).children[0].style.outline="";
                 hideLines();
                 // Set New Planet
-                document.getElementById(planet).children[0].style.borderRadius="100%";
-                document.getElementById(planet).children[0].style.outline="#1c9701 thick solid";
+                document.getElementById(planet).children[0].style.outline="rgba(0, 128, 0, 0.85) thick solid";
                 sessionStorage.setItem("currentPlanet", planet);
                 showLines();
             } else {
