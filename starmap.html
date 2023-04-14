@@ -8,6 +8,17 @@
         <link rel="stylesheet" href="css/bootstrap.min.css">
         <link rel="stylesheet" href="css/starmap.css">
         <style>
+            
+            body{
+                /* No Select Text */
+                -webkit-user-select:none;
+                -moz-user-select:-moz-none;
+                -ms-user-select:none;
+                user-select:none
+            }
+            
+        </style>
+        <style>
             .grid-item {
                 background-color: rgba(255, 255, 255, 0.8);
                 border: 1px solid rgba(0, 0, 0, 0.8);
@@ -16,7 +27,8 @@
                 margin-right: 5px;
                 margin-top: 5px;
                 width: 50px;
-                height: 50px
+                height: 50px;
+                cursor: pointer;
             }
             .grid-container {
                 display: grid;
@@ -120,7 +132,7 @@
             <div id="Hatsya_Mintaka_Line"></div>
             </div>
 
-            <div id="starmap">
+            <div id="starmap" style="cursor: pointer;">
             <div id="sun" style="position: absolute; top: 1%; left: 1%;" >
                 <image src="images/MillionthVector/Planets/sun.png" style="
                     height: 190px;
@@ -460,7 +472,7 @@
 
         <div id="ui">
             <div id="inventory_system">
-                <div id = "inventoryButton" onclick = "openInventory()" style=" width: 100px; height: 100px; position: absolute; 
+                <div id = "inventoryButton" onclick = "openInventory()" style="cursor: pointer; width: 100px; height: 100px; position: absolute; 
                 top: 2%; left: 30%; border-radius: 20%;">
                     <image src = "images/custom/crate nobg.png" style = "width: 100%;">
                         <p style="color: aliceblue; text-align: center; font-size: 20;">
