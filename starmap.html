@@ -53,6 +53,12 @@
         </video>
         <!-- Body -->
         <div id="main">
+            <div id="faction borders">
+                <canvas>
+
+                </canvas>
+            </div>
+
             <div id="highways">
             <div id="Aslan_Seidon_Line"></div>
             <div id="Aslan_Thyrmae_Line"></div>
@@ -492,7 +498,7 @@
             </div>
 
             <div id="resources">
-                <div style="position: absolute; padding: 10px; width: 450px; height: 150px; background-color: rgba(59, 59, 59, 0.4); right: 40%; top: -9%; border-radius: 50px;">
+                <div style="position: absolute; padding: 10px; width: 450px; height: 150px; background-color: rgba(59, 59, 59, 0.4); left: 37%; top: -85px; border-radius: 50px; position: absolute;">
                     <div id="currency" style="display:inline; margin-left: 40px; top: 60%; position: relative;">
                         <image src="images/custom/T_Currency.png" style="width: 40px;">
                             <p style="display:inline; font-size: 30px; color:white;">
@@ -527,6 +533,7 @@
                 $('.page-loader').fadeOut('slow');
                 },35); //change back to 3500 before release
             });
+            window.onresize = function(){window.location.reload();}
         </script>
         <script> // Inventory
             // Open Inventory
