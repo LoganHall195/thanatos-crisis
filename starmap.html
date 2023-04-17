@@ -517,7 +517,8 @@
         <div id="ui">
             <div id ="debug" style="background-color: white; position: absolute;">
                 <h3>Debug Menu</h3>
-                <button onclick="debug('asteroid')">-> asteroid minigame</button>
+                <button onclick="debug('asteroid')">-> asteroid minigame</button> <br>
+                <button onclick="debug('battle')">-> battle</button>
             </div>
 
             <div id="minigame">
@@ -639,6 +640,15 @@
                     if (document.getElementById("minigameIframe").style.visibility=="hidden") {
                         document.getElementById("minigameIframe").style.visibility="visible"
                         document.getElementById("minigameIframe").src="minigames/asteroid_defense.html"
+                    }
+                    else {
+                        document.getElementById("minigameIframe").style.visibility="hidden"
+                        document.getElementById("minigameIframe").src=""
+                    }
+                } else if (command=="battle"){
+                    if (document.getElementById("minigameIframe").style.visibility=="hidden") {
+                        document.getElementById("minigameIframe").style.visibility="visible"
+                        document.getElementById("minigameIframe").src="minigames/battle.html"
                     }
                     else {
                         document.getElementById("minigameIframe").style.visibility="hidden"
