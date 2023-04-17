@@ -515,6 +515,18 @@
         </div>
 
         <div id="ui">
+            <div id ="debug" style="background-color: white; position: absolute;">
+                <h3>Debug Menu</h3>
+                <button onclick="debug('asteroid')">-> asteroid minigame</button>
+            </div>
+
+            <div id="minigame">
+                <iframe id="minigameIframe" src="" scrolling="no" style="
+                    width: 50%; height: 50%; display:block; left: 25%; margin-top: 10%; position: absolute; 
+                    visibility: hidden">
+                </iframe>
+            </div>
+
             <div id="inventory_system">
                 <div id = "inventoryButton" onclick = "openInventory()" style="cursor: pointer; width: 100px; height: 100px; position: absolute;
                 top: 0%;
@@ -614,9 +626,26 @@
             $(window).on('load',function(){
                 setTimeout(function(){
                 $('.page-loader').fadeOut('slow');
-                },35); //change back to 3500 before release
+                },5); //change back to 3500 before release
             });
             window.onresize = function(){window.location.reload();}
+            function closeIFrame(){
+                $('#minigameIframe').remove();
+            }
+        </script>
+        <script> // Debug
+            function debug(command){
+                if (command=="asteroid"){
+                    if (document.getElementById("minigameIframe").style.visibility=="hidden") {
+                        document.getElementById("minigameIframe").style.visibility="visible"
+                        document.getElementById("minigameIframe").src="minigames/asteroid_defense.html"
+                    }
+                    else {
+                        document.getElementById("minigameIframe").style.visibility="hidden"
+                        document.getElementById("minigameIframe").src=""
+                    }
+                }
+            }
         </script>
         <script> // Inventory
             // Open Inventory
