@@ -49,6 +49,12 @@ function gridSelect(id) {
 // Item List
 let itemList = [
   {
+    name: 'Scrap',
+    description: 'Salvaged scrap from an ship. Can be sold for Thanite',
+    type: 'Sellable Item',
+    image: 'scrap metal re.png',
+  },
+  {
     name: 'Shield Recharge',
     description: 'Recharge your shields if they are depleted',
     type: 'Ship Mod',
@@ -58,7 +64,7 @@ let itemList = [
 // Player Inventory
 let inventory = [
   {
-    name: 'Shield Recharge',
+    name: 'Scrap',
     quantity: 1,
   },
 ];
@@ -73,14 +79,17 @@ function populateGrid(items, list) {
     const image = document.createElement('img');
     image.src = './images/custom/items/' + result.image;
     image.alt = item.name;
-    image.style = 'width: 50px; margin-left: -23px; margin-top: -25';
+    image.style = 'width: 65px; margin-left: -30px; margin-top: -33px';
     gridItem.appendChild(image);
 
     const quantity = document.createElement('p');
     quantity.classList.add('quantity');
     quantity.textContent = `${item.quantity}`;
     gridItem.appendChild(quantity);
-    quantity.style = 'margin-left: 17; margin-top: -15;';
+    quantity.style = 'margin-left: 24; margin-top: -15; color: black;';
+  }
+  for (let i = 0; i < itemList.length; i++) {
+    console.log(itemList[i]);
   }
 }
 

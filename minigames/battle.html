@@ -1,332 +1,540 @@
-<html lang="en"><head>
-    <meta charset="UTF-8">
-    
-  
-      <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png">
-  
-      <meta name="apple-mobile-web-app-title" content="CodePen">
-  
-      <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
-  
-      <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111">
-  
-  
-  
-    
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+
+    <link
+      rel="apple-touch-icon"
+      type="image/png"
+      href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png"
+    />
+
+    <meta name="apple-mobile-web-app-title" content="CodePen" />
+
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico"
+    />
+
+    <link
+      rel="mask-icon"
+      type="image/x-icon"
+      href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg"
+      color="#111"
+    />
+
     <title>CodePen - Space Battle</title>
-    
-    
-    
-    
-  <style>
-  * {
-      box-sizing: border-box;
-  }
-  
-  html {
-      width: 100%
-  }
-  
-  body {
-      width: 1100px;
-      background: #404040;
-      margin: 50px auto;
-  }
-  
-  button {
-      background: #eee;
-      padding: 10px 25px;
-      margin-bottom: 15px;
-      display: inline-block;
-  }
-  
-  
-  #yourHealth, #compHealth {
-      position: relative;
-      height: 30px;
-      width: 500px;
-      border: white 3px solid;
-      border-radius: 3px;
-      margin-right: 20px;
-      display: inline-block;
-  }
-  
-  #yourHealthBar, #compHealthBar {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      background: lightgreen;
-  }
-  
-  #yourShields, #compShields {
-      position: relative;
-      height: 12px;
-      width: 500px;
-      border: white 3px solid;
-      border-radius: 3px;
-      margin-right: 20px;
-      display: inline-block;
-  }
-  
-  #yourShieldBar, #compShieldBar {
-      position: absolute;
-      bottom: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      background: lightblue;
-  }
-  
-  #announcements {
-      border: black 2px solid;
-    width: 1025px;
-  }
-  
-  #announcements span {
-      color: white;
-  }
-  
-  #compShip, #yourShip {
-    width: 500px;
-    height: 400px;
-    display: inline-block;
-  }
-  </style>
-  
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        width: 100%;
+      }
+
+      body {
+        width: 1100px;
+        background: rgba(5, 5, 5, 0.7);
+        margin: 50px auto;
+      }
+
+      button {
+        background: #eee;
+        padding: 10px 25px;
+        margin-bottom: 15px;
+        display: inline-block;
+        border-radius: 10px;
+        opacity: 0.8;
+      }
+
+      #yourHealth,
+      #compHealth {
+        position: relative;
+        height: 30px;
+        width: 500px;
+        border: white 3px solid;
+        border-radius: 3px;
+        margin-right: 20px;
+        display: inline-block;
+      }
+
+      #yourHealthBar,
+      #compHealthBar {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: lightgreen;
+      }
+
+      #yourShields,
+      #compShields {
+        position: relative;
+        height: 12px;
+        width: 500px;
+        border: white 3px solid;
+        border-radius: 3px;
+        margin-right: 20px;
+        display: inline-block;
+      }
+
+      #yourShieldBar,
+      #compShieldBar {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        background: lightblue;
+      }
+
+      #announcements {
+        border: white 2px solid;
+        width: 1025px;
+        color: white;
+      }
+
+      #announcements span {
+        color: white;
+      }
+
+      #compShip,
+      #yourShip {
+        width: 500px;
+        height: 400px;
+        display: inline-block;
+        background-position: center;
+        background-size: cover;
+        position: relative;
+        pointer-events: none;
+      }
+
+      #yourLaser,
+      #compLaser {
+        width: 50px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        display: block;
+        margin: auto;
+        z-index: -1;
+      }
+
+      #yourExplosion,
+      #compExplosion {
+        width: 500px;
+        position: absolute;
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        display: block;
+        margin: auto;
+        z-index: 1;
+        visibility: hidden;
+      }
+
+      .shipDodge {
+        animation: dodge 6s;
+      }
+      .yourShipAttack {
+        animation: youAttack 1s;
+        animation-iteration-count: 5;
+      }
+      .compShipAttack {
+        visibility: visible;
+        animation: compAttack 1s;
+        animation-iteration-count: 5;
+      }
+
+      .shipHeal {
+        animation: heal 7s;
+        animation-iteration-count: 3;
+      }
+
+      @keyframes dodge {
+        0% {
+          rotate: 0deg;
+        }
+        25% {
+          rotate: -45deg;
+        }
+        50% {
+          rotate: 0deg;
+        }
+        75% {
+          rotate: 45deg;
+        }
+        100% {
+          rotate: 0deg;
+        }
+      }
+
+      @keyframes youAttack {
+        0% {
+          animation-timing-function: ease-out;
+        }
+        100% {
+          transform: translateX(570px);
+        }
+      }
+
+      @keyframes compAttack {
+        0% {
+          animation-timing-function: ease-out;
+        }
+        100% {
+          transform: translateX(-570px);
+        }
+      }
+
+      @keyframes heal {
+        0% {
+          -webkit-filter: blur(0px);
+          filter: blur(0px) saturate(1);
+        }
+        10% {
+          -webkit-filter: blur(3px);
+          filter: blur(1px) saturate(2);
+        }
+        20% {
+          -webkit-filter: blur(0px);
+          filter: blur(0px) saturate(1);
+        }
+        30% {
+          -webkit-filter: blur(3px);
+          filter: blur(1px) saturate(2);
+        }
+        40% {
+          -webkit-filter: blur(0px);
+          filter: blur(0px) saturate(1);
+        }
+        50% {
+          -webkit-filter: blur(3px);
+          filter: blur(1px) saturate(2);
+        }
+        6% {
+          -webkit-filter: blur(0px);
+          filter: blur(0px) saturate(1);
+        }
+        70% {
+          -webkit-filter: blur(3px);
+          filter: blur(1px) saturate(2);
+        }
+        80% {
+          -webkit-filter: blur(0px);
+          filter: blur(0px) saturate(1);
+        }
+        90% {
+          -webkit-filter: blur(3px);
+          filter: blur(1px) saturate(2);
+        }
+        100% {
+          -webkit-filter: blur(0px);
+          filter: blur(0px) saturate(1);
+        }
+      }
+    </style>
+
     <script>
-    window.console = window.console || function(t) {};
-  </script>
-  
-    
-    
+      window.console = window.console || function (t) {};
+    </script>
   </head>
-  
-  <body translate="no">
-    <img src="https://media.discordapp.net/attachments/847635333871829052/1097607433989410896/you-removebg-preview.png" id="yourShip">
-  <p style="display: inline-block;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
-      <img src="https://media.discordapp.net/attachments/847635333871829052/1097606671704010843/enemy-removebg-preview.png" id="compShip">
-      <br>
-      <button id="attack" onclick="fight(id)">Attack</button>
-          <button id="counter" onclick="fight(id)">Dodge</button>
-      <button id="heal" onclick="fight(id)">Heal</button>
-      <br>
-      <div id="yourShields"><div id="yourShieldBar"></div></div>
-          <div id="compShields"><div id="compShieldBar"></div></div>
-      <br>
-          <div id="yourHealth"><div id="yourHealthBar"></div></div>
-          <div id="compHealth"><div id="compHealthBar"></div></div>
-      <br><br><br>
-          <div id="announcements"></div>
-      <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
-  
-    
-        <script id="rendered-js">
-  // each player chooses a move
-  // defense goes first (player then comp)
-  // attacks go second (player then comp)
-  // health gets minused as attacks land
-  
-  
-  
-  //Global variables >>>>>>>>>>>>>>>>>>>>>>>
-  //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-  
-  var yourMove;
-  var compMove;
-  var savedCompMove;
-  var yourHealth = 100;
-  var yourShields = 100;
-  var compHealth = 100;
-  var compShields = 100;
-  
-  //Turn counters >>>>>>>>>>>>>>>>>>>>>>>>>>
-  //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-  
-  var totRounds = 0;
-  
-  //Doument rewrites >>>>>>>>>>>>>>>>>>>>>>>
-  //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-  
-  var res;
-  var playByPlay = document.getElementById('announcements');
-  var yourShieldBar = document.getElementById('yourShieldBar');
-  var compShieldBar = document.getElementById('compShieldBar');
-  var yourHealthBar = document.getElementById('yourHealthBar');
-  var compHealthBar = document.getElementById('compHealthBar');
-  var attackButton = document.getElementById('attack');
-  var counterButton = document.getElementById('counter');
-  var healButton = document.getElementById('heal');
-  
-  //Run on load >>>>>>>>>>>>>>>>>>>>>>>>>>>>
-  //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-  
-  function enableButtons() {
-    attackButton.disabled = false;
-    counterButton.disabled = false;
-    healButton.disabled = false;
-  }
-  
-  //Moves >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-  //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-  
-  
-  //Shared Functions >>>>>>>>>>>>>>>>>>>>>>>
-  //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-  
-  // triggers the fight in the HTML
-  function fight(id) {
-    addRound();
-    compMove(id);
-    healthChange();
-    gameOver();
-  }
-  // adds a round to the round counters
-  function addRound() {
-    totRounds += 1;
-  }
-  
-  
-  // Dislpays results of the round
-  function roundResults(res) {
-    playByPlay.innerHTML = res;
-  }
-  
-  function healthChange() {
-    yourHealthBar.style.width = yourHealth + "%";
-    compHealthBar.style.width = compHealth + "%";
-    yourShieldBar.style.width = yourShields + "%";
-    compShieldBar.style.width = compShields + "%";
-  }
-  
-  function gameOver() {
-  
-    if (yourHealth === 0 && compHealth === 0) {
-      res = 'Game Over, you tied!';
-      attackButton.disabled = true;
-      counterButton.disabled = true;
-      healButton.disabled = true;
-      roundResults(res);
-    } else if (yourHealth === 0 && compHealth > 0) {
-      res = 'Game Over, you lost!';
-      attackButton.disabled = true;
-      counterButton.disabled = true;
-      healButton.disabled = true;
-      roundResults(res);
-    } else if (yourHealth > 0 && compHealth === 0) {
-      res = 'Game Over, you won!';
-      attackButton.disabled = true;
-      counterButton.disabled = true;
-      healButton.disabled = true;
-      roundResults(res);
-    }
-  }
-  
-  //The Game >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-  //>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-  
-  // Takes the moves of the player and generates one for the comp and then runs the damage step
-  function compMove(id) {
-    var move = Math.floor(Math.random() * 3 + 1);
-    if (move == 1) {
-      savedCompMove = 'attack';
-    } else if (move == 2) {
-      savedCompMove = 'heal';
-    } else {
-      savedCompMove = 'counter';
-    };
-    res = 'your move is <span>' + id + '</span> and the computers move is <span>' + savedCompMove + '</span> on round ' + totRounds;
-    damageStep(id, savedCompMove);
-    roundResults(res);
-  
-  }
-  
-  //proccesses the moves to a result
-  function damageStep(y, c) {
-    if (y === 'attack' && c === 'attack') {
-      res = 'Both players took damage';
-      // Calculate Damage for computer
-      compShields -= 10;
-      if (compShields < 0) {
-        compHealth += compShields;
-        compShields = 0;
-        if (compHealth <= 0) {
-          compHealth = 0;
+
+  <body
+    translate="no"
+    data-new-gr-c-s-check-loaded="14.1105.0"
+    data-gr-ext-installed=""
+  >
+    <div
+      id="yourShip"
+      style="
+        background-image: url(https://media.discordapp.net/attachments/847635333871829052/1097607433989410896/you-removebg-preview.png);
+      "
+    >
+      <img
+        src="https://media.discordapp.net/attachments/847635333871829052/1097670408049795252/image.png"
+        id="yourLaser"
+      />
+
+      <img
+        src="https://cdn.discordapp.com/attachments/847635333871829052/1097891722303918143/ezgif.com-gif-maker_2.gif"
+        id="yourExplosion"
+      />
+    </div>
+    <p style="display: inline-block">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</p>
+    <div
+      id="compShip"
+      style="
+        background-image: url(https://media.discordapp.net/attachments/847635333871829052/1097606671704010843/enemy-removebg-preview.png);
+      "
+    >
+      <img
+        src="https://media.discordapp.net/attachments/847635333871829052/1097670408049795252/image.png"
+        id="compLaser"
+      />
+
+      <img
+        src="https://cdn.discordapp.com/attachments/847635333871829052/1097891722303918143/ezgif.com-gif-maker_2.gif"
+        id="compExplosion"
+      />
+    </div>
+    <br />
+    <button id="attack" onclick="fight(id)">Fire Weapon</button>
+    <button id="counter" onclick="fight(id)">Dodge</button>
+    <button id="heal" onclick="fight(id)">Recharge Shields</button>
+    <br />
+    <div id="yourShields"><div id="yourShieldBar"></div></div>
+    <div id="compShields"><div id="compShieldBar"></div></div>
+    <br />
+    <div id="yourHealth"><div id="yourHealthBar"></div></div>
+    <div id="compHealth"><div id="compHealthBar"></div></div>
+    <br /><br /><br />
+    <div id="announcements"></div>
+    <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
+
+    <script id="rendered-js">
+      var yourMove;
+      var compMove;
+      var savedCompMove;
+      var yourHealth = 100;
+      var yourShields = 100;
+      var compHealth = 100;
+      var compShields = 100;
+
+      var totRounds = 0;
+
+      var res;
+      var playByPlay = document.getElementById('announcements');
+      var yourShip = document.getElementById('yourShip');
+      var compShip = document.getElementById('compShip');
+      var yourLaser = document.getElementById('yourLaser');
+      var compLaser = document.getElementById('compLaser');
+      var yourExplosion = document.getElementById('yourExplosion');
+      var compExplosion = document.getElementById('compExplosion');
+      var yourShieldBar = document.getElementById('yourShieldBar');
+      var compShieldBar = document.getElementById('compShieldBar');
+      var yourHealthBar = document.getElementById('yourHealthBar');
+      var compHealthBar = document.getElementById('compHealthBar');
+      var attackButton = document.getElementById('attack');
+      var counterButton = document.getElementById('counter');
+      var healButton = document.getElementById('heal');
+
+      function enableButtons() {
+        attackButton.disabled = false;
+        counterButton.disabled = false;
+        healButton.disabled = false;
+      }
+
+      // Triggers the fight
+      function fight(id) {
+        // Supposed to remove animations
+        yourShip.className = '';
+        compShip.className = '';
+        yourLaser.className = '';
+        compLaser.className = '';
+        yourLaser.style.visibility = 'hidden';
+        compLaser.style.visibility = 'hidden';
+        //
+        addRound();
+        compMove(id);
+        healthChange();
+        gameOver();
+      }
+      // Incrememnt round counters
+      function addRound() {
+        totRounds += 1;
+      }
+
+      // Dislpays round results
+      function roundResults(res) {
+        playByPlay.innerHTML = res;
+      }
+
+      function healthChange() {
+        yourHealthBar.style.width = yourHealth + '%';
+        compHealthBar.style.width = compHealth + '%';
+        yourShieldBar.style.width = yourShields + '%';
+        compShieldBar.style.width = compShields + '%';
+      }
+
+      function gameOver() {
+        if (yourHealth === 0 && compHealth === 0) {
+          yourShip.className = '';
+          compShip.className = '';
+          yourLaser.className = '';
+          compLaser.className = '';
+          yourLaser.style.visibility = 'hidden';
+          compLaser.style.visibility = 'hidden';
+          res = 'Game Over, you tied!';
+          attackButton.disabled = true;
+          counterButton.disabled = true;
+          healButton.disabled = true;
+          roundResults(res);
+          yourExplosion.style.visibility = 'visible';
+          compExplosion.style.visibility = 'visible';
+        } else if (yourHealth === 0 && compHealth > 0) {
+          yourShip.className = '';
+          compShip.className = '';
+          yourLaser.className = '';
+          compLaser.className = '';
+          yourLaser.style.visibility = 'hidden';
+          compLaser.style.visibility = 'hidden';
+          res = 'Game Over, you lost!';
+          attackButton.disabled = true;
+          counterButton.disabled = true;
+          healButton.disabled = true;
+          roundResults(res);
+          yourExplosion.style.visibility = 'visible';
+        } else if (yourHealth > 0 && compHealth === 0) {
+          yourShip.className = '';
+          compShip.className = '';
+          yourLaser.className = '';
+          compLaser.className = '';
+          yourLaser.style.visibility = 'hidden';
+          compLaser.style.visibility = 'hidden';
+          res = 'Game Over, you won!';
+          attackButton.disabled = true;
+          counterButton.disabled = true;
+          healButton.disabled = true;
+          roundResults(res);
+          compExplosion.style.visibility = 'visible';
         }
       }
-      // Calculate Damage for player
-      yourShields -= 10 /*+(10*(totRounds/10))*/; //Difficulty Modifier?
-      if (yourShields < 0) {
-        yourHealth += yourShields;
-        yourShields = 0;
-        if (yourHealth <= 0) {
-          yourHealth = 0;
+
+      // Generates comp move then calls damageStep
+      function compMove(id) {
+        var move = Math.floor(Math.random() * 3 + 1);
+        if (move == 1) {
+          savedCompMove = 'attack';
+        } else if (move == 2) {
+          savedCompMove = 'heal';
+        } else {
+          savedCompMove = 'counter';
+        }
+        res =
+          'your move is <span>' +
+          id +
+          '</span> and the computers move is <span>' +
+          savedCompMove +
+          '</span> on round ' +
+          totRounds;
+        damageStep(id, savedCompMove);
+        roundResults(res);
+      }
+
+      // Proccesses player/comp moves and applies results
+      function damageStep(y, c) {
+        if (y === 'attack' && c === 'attack') {
+          res = 'Both players took damage';
+          yourLaser.style.visibility = 'visible';
+          compLaser.style.visibility = 'visible';
+          yourLaser.classList.add('yourShipAttack');
+          compLaser.classList.add('compShipAttack');
+          // Calculate Damage for computer
+          compShields -= 10;
+          if (compShields < 0) {
+            compHealth += compShields;
+            compShields = 0;
+            if (compHealth <= 0) {
+              compHealth = 0;
+            }
+          }
+          // Calculate Damage for player
+          yourShields -= 10 /*+(10*(totRounds/10))*/; //Difficulty Modifier?
+          if (yourShields < 0) {
+            yourHealth += yourShields;
+            yourShields = 0;
+            if (yourHealth <= 0) {
+              yourHealth = 0;
+            }
+          }
+        } else if (y === 'counter' && c === 'counter') {
+          res = 'Both ships performed evasive manuevers';
+          yourShip.classList.add('shipDodge');
+          compShip.classList.add('shipDodge');
+        } else if (y === 'attack' && c === 'counter') {
+          res = 'Your Attack Missed';
+          yourLaser.style.visibility = 'visible';
+          yourLaser.classList.add('yourShipAttack');
+          compShip.classList.add('shipDodge');
+        } else if (y === 'counter' && c === 'attack') {
+          res = 'You dodged their attack!';
+          yourShip.classList.add('shipDodge');
+          compLaser.style.visibility = 'visible';
+          compLaser.classList.add('compShipAttack');
+        } else if (y === 'heal' && c === 'heal') {
+          res = 'Both ships recharged their shields';
+          yourShip.classList.add('shipHeal');
+          compShip.classList.add('shipHeal');
+          // Recharge both shields max 100
+          yourShields += 10;
+          if (yourShields > 100) {
+            yourShields = 100;
+          }
+          compShields += 10;
+          if (compShields > 100) {
+            compShields = 100;
+          }
+        } else if (y === 'heal' && c === 'counter') {
+          res =
+            'While you recharged your shields, the other ship performed evasive manuevers';
+          yourShip.classList.add('shipHeal');
+          compShip.classList.add('shipDodge');
+          yourShields += 10;
+          if (yourShields > 100) {
+            yourShields = 100;
+          }
+        } else if (y === 'counter' && c === 'heal') {
+          res =
+            'While you performed evasive manuevers, the other ship recharged their shields';
+          yourShip.classList.add('shipDodge');
+          compShip.classList.add('shipHeal');
+          compShields += 10;
+          if (compShields > 100) {
+            compShields = 100;
+          }
+        } else if (y === 'attack' && c === 'heal') {
+          res =
+            'You attacked the other ship while they attempted to recharge their shields';
+          yourLaser.style.visibility = 'visible';
+          yourLaser.classList.add('yourShipAttack');
+          compShip.classList.add('shipHeal');
+          compShields -= 5;
+          if (compShields < 0) {
+            compHealth += compShields;
+            compShields = 0;
+            if (compHealth <= 0) {
+              compHealth = 0;
+            }
+          }
+        } else if (y === 'heal' && c === 'attack') {
+          res =
+            'While you attempted to recharge your shields, the other ship attacked';
+          yourShip.classList.add('shipHeal');
+          compLaser.style.visibility = 'visible';
+          compLaser.classList.add('compShipAttack');
+          yourShields -= 5 /*+(10*(totRounds/10))*/; //Difficulty Modifier?
+          if (yourShields < 0) {
+            yourHealth += yourShields;
+            yourShields = 0;
+            if (yourHealth <= 0) {
+              yourHealth = 0;
+            }
+          }
         }
       }
-    } else if (y === 'counter' && c === 'counter') {
-      res = 'Both ships performed evasive manuevers';
-  
-    } else if (y === 'attack' && c === 'counter') {
-      res = 'Your Attack Missed';
-  
-    } else if (y === 'counter' && c === 'attack') {
-      res = 'You dodged their attack!';
-  
-    } else if (y === 'heal' && c === 'heal') {
-      res = 'Both ships recharged their shields';
-      // Recharge both shields max 100
-      yourShields += 10;
-      if (yourShields > 100) {
-        yourShields = 100;
-      }
-      compShields += 10;
-      if (compShields > 100) {
-        compShields = 100;
-      }
-    } else if (y === 'heal' && c === 'counter') {
-      res = 'While you recharged your shields, the other ship performed evasive manuevers';
-      yourShields += 10;
-  
-      if (yourShields > 100) {
-        yourShields = 100;
-      }
-    } else if (y === 'counter' && c === 'heal') {
-      res = 'While you performed evasive manuevers, the other ship recharged their shields';
-      compShields += 10;
-  
-      if (compShields > 100) {
-        compShields = 100;
-      }
-    } else if (y === 'attack' && c === 'heal') {
-      res = 'You attacked the other ship while they attempted to recharge their shields';
-      compShields -= 5;
-      if (compShields < 0) {
-        compHealth += compShields;
-        compShields = 0;
-        if (compHealth <= 0) {
-          compHealth = 0;
-        }
-      }
-    } else if (y === 'heal' && c === 'attack') {
-      res = 'While you attempted to recharge your shields, the other ship attacked';
-      yourShields -= 5 /*+(10*(totRounds/10))*/; //Difficulty Modifier?
-      if (yourShields < 0) {
-        yourHealth += yourShields;
-        yourShields = 0;
-        if (yourHealth <= 0) {
-          yourHealth = 0;
-        }
-      }
-    }
-  }
-  
-  
-  window.onload = enableButtons();
-  //# sourceURL=pen.js
-      </script>
-  
-    
-  
-  
-  </body></html>
+
+      window.onload = enableButtons();
+      //# sourceURL=pen.js
+    </script>
+  </body>
+  <grammarly-desktop-integration
+    data-grammarly-shadow-root="true"
+  ></grammarly-desktop-integration>
+</html>
