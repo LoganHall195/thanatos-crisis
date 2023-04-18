@@ -55,6 +55,19 @@ let itemList = [
     image: 'scrap metal re.png',
   },
   {
+    name: 'Alien relic',
+    description: 'A relic from a different race. Can be sold for Thanite',
+    type: 'Sellable Item',
+    image: 'scrap metal re.png',
+  },
+  {
+    name: 'Valuable Ores',
+    description:
+      'Rare ores sought highly throughout the galaxy. Can be sold for Thanite',
+    type: 'Sellable Item',
+    image: 'scrap metal re.png',
+  },
+  {
     name: 'Shield Recharge',
     description: 'Recharge your shields if they are depleted',
     type: 'Ship Mod',
