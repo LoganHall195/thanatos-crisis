@@ -429,7 +429,7 @@
         <div id="ui">
             <div id ="debug">
                 <h3>Debug Menu</h3>
-                <button onclick="debug('asteroid')">-> asteroid minigame</button> <br>
+                <button onclick="debug('asteroid')">-> asteroid</button> <br>
                 <button onclick="debug('battle')">-> battle</button>
             </div>
 
@@ -439,7 +439,7 @@
             </div>
 
             <div id="inventory_system">
-                <div id = "inventoryButton" onclick = "openInventory()" style="">
+                <div id = "inventoryButton" onclick = "openInventory()">
                     <image src = "images/custom/crate nobg.png" style = "width: 100%;">
                         <p style="color: aliceblue; text-align: center; font-size: 20;">
                             Inventory
@@ -509,6 +509,7 @@
                 
                 //openInventory(); // Remove after editing inventory items
                 worldSeed(sessionStorage.getItem("seed"));
+                debug("battle"); // Needed to initialize the debug menu
             });
             window.onresize = function(){window.location.reload();}
         </script>
@@ -517,7 +518,7 @@
                 if (command=="asteroid"){
                     if (document.getElementById("minigameIframe").style.visibility=="hidden") {
                         document.getElementById("minigameIframe").style.visibility="visible"
-                        document.getElementById("minigameIframe").src="minigames/asteroid_defense.html"
+                        document.getElementById("minigameIframe").src="minigames/asteroid.html"
                     }
                     else {
                         document.getElementById("minigameIframe").style.visibility="hidden"
@@ -539,15 +540,19 @@
             function worldSeed(sessionSeed){
                 var difficulty = sessionStorage.getItem("difficulty");
                 var lastPos = sessionStorage.getItem("currentPlanet");
-                difficulty = '1';// For testing
-                //lastPos = null;// For testing
+                
+                // For testing
+                difficulty = '1'; sessionStorage.setItem("difficulty", difficulty);
+                //lastPos = null; //sessionStorage.setItem("currentPlanet", lastPos);
 
                 // Populate Events
-                var faction1Planets=["Aslan","Seidon","Valera","Hymera","Starholm","Bioholm","Kaelda","Caema","Serenity","Lumera","Crysholm","Thyrmae"];
-                var faction2Planets=["KG-348", "Irulan", "Acheron", "Cerulan", "Thedus", "Cigni", "Neo Eden", "LV-223", "Providence", "Caladan", "LV-178"];
-                var faction3Planets=["Betelgeuse", "Alnitak", "Alnilam", "Mintaka", "Omni Prime", "Meissa", "Theta-1E", "Hatsya", "Rigel", "Theta-1B", "Fury-161"];
-                var faction4Planets=["Forge", "New Hope", "Ionus", "Liberty", "Haven", "XT-5", "Sky Ark", "Drybone", "XT-0", "Theta-1C", "Eos", "XT-3"];
-                var allFactionsPlanets=[faction1Planets,faction2Planets,faction3Planets,faction4Planets];
+                var faction1Planets = ["Aslan","Seidon","Valera","Hymera","Starholm","Bioholm","Kaelda","Caema","Serenity","Lumera","Crysholm","Thyrmae"];
+                var faction2Planets = ["KG-348", "Irulan", "Acheron", "Cerulan", "Thedus", "Cigni", "Neo Eden", "LV-223", "Providence", "Caladan", "LV-178"];
+                var faction3Planets = ["Betelgeuse", "Alnitak", "Alnilam", "Mintaka", "Omni Prime", "Meissa", "Theta-1E", "Hatsya", "Rigel", "Theta-1B", "Fury-161"];
+                var faction4Planets = ["Forge", "New Hope", "Ionus", "Liberty", "Haven", "XT-5", "Sky Ark", "Drybone", "XT-0", "Theta-1C", "Eos", "XT-3"];
+                console.log(faction1Planets);
+                sessionStorage.setItem("allFactionsPlanets",[faction1Planets,faction2Planets,faction3Planets,faction4Planets]);
+                var allFactionsPlanets = sessionStorage.getItem("allFactionsPlanets");
 
                 // Ensure Spawn
                 if (lastPos==null){ // If no session save found
@@ -568,7 +573,6 @@
                             
                             break;
                     }
-                    sessionStorage.setItem("faction", difficulty);
                 } else {
                     forcetravelTo(lastPos);
                 }
@@ -576,16 +580,17 @@
                 // Ensure Seed
                 if (sessionSeed==null){
                     // Generating Seed
-                    var seed = Math.floor((Math.random()*eval("faction"+sessionStorage.getItem("faction")+"Planets.length"))+1);
+                    var seed = Math.floor((Math.random()*eval("faction"+sessionStorage.getItem("difficulty")+"Planets.length"))+1);
+                    seed = 0; // Testing
                     sessionStorage.setItem("seed", seed);
                 } 
 
                 // Faction Events - Last event may be cut depending on player start
                 //var exampleEvents=["battle", "battle", "asteroid"] //3 events
-                var faction1Events=["faction1Events"] //12 events
-                var faction2Events=["faction2Events"] //11 events
-                var faction3Events=["faction3Events"] //11 events
-                var faction4Events=["faction4Events"] //12 events
+                var faction1Events=["battle", "", "", "", "", "", "", "", "", "", "", ""] //12 events
+                var faction2Events=["", "", "", "", "", "", "", "", "", "", ""] //11 events
+                var faction3Events=["", "", "", "", "", "", "", "", "", "", ""] //11 events
+                var faction4Events=["", "", "", "", "", "", "", "", "", "", "", ""] //12 events
 
                 // Apply Seed Randomizer
                 for (i=0; i<sessionStorage.getItem("seed"); i++){ // Faction 1
@@ -609,6 +614,55 @@
                     faction4Events.unshift(temp)
                 }
                 console.log(faction1Events, faction2Events, faction3Events, faction4Events);
+                
+                sessionStorage.setItem("faction1Planets",JSON.stringify(faction1Planets));
+                sessionStorage.setItem("faction2Planets",JSON.stringify(faction2Planets));
+                sessionStorage.setItem("faction3Planets",JSON.stringify(faction3Planets));
+                sessionStorage.setItem("faction4Planets",JSON.stringify(faction4Planets));
+                sessionStorage.setItem("faction1Events",JSON.stringify(faction1Events));
+                sessionStorage.setItem("faction2Events",JSON.stringify(faction2Events));
+                sessionStorage.setItem("faction3Events",JSON.stringify(faction3Events));
+                sessionStorage.setItem("faction4Events",JSON.stringify(faction4Events));
+            }
+
+            function checkEvent(planet){
+                var faction1Planets = JSON.parse(sessionStorage.getItem("faction1Planets"));
+                var faction2Planets = JSON.parse(sessionStorage.getItem("faction2Planets"));
+                var faction3Planets = JSON.parse(sessionStorage.getItem("faction3Planets"));
+                var faction4Planets = JSON.parse(sessionStorage.getItem("faction4Planets"));
+                var faction1Events = JSON.parse(sessionStorage.getItem("faction1Events"));
+                var faction2Events = JSON.parse(sessionStorage.getItem("faction2Events"));
+                var faction3Events = JSON.parse(sessionStorage.getItem("faction3Events"));
+                var faction4Events = JSON.parse(sessionStorage.getItem("faction4Events"));
+                
+                console.log(faction1Planets)
+                
+                for (i=1; i<4; i++){
+                    var index = eval("faction" + i + "Planets.indexOf(\""+planet+"\");");
+                    //console.log(faction1Planets.indexOf("Aslan"))
+                    if (index==-1){
+                        console.log("Planet not found in array")
+                    } else {
+                        event = eval("faction" + i + "Events[" + index + "]");
+                        console.log("Planet: " + planet + "|" + "Faction: " + i + 
+                                    "|" + "Event: " + event);
+                        switch(event){
+                            case "battle":
+                                console.log("Battle Initiated!");
+                                debug("battle");
+                                sessionStorage.setItem("activeEvent", "battle");
+                                break;
+                            case "asteroids":
+                                console.log("Asteroids detected!");
+                                debug("asteroid");
+                                sessionStorage.setItem("activeEvent", "battle");
+                                break;
+                            default:
+                                break;
+                        }
+                    }
+                }
+                
             }
 
         </script>

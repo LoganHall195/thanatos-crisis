@@ -113,6 +113,8 @@
                 document.getElementById(planet).children[0].style.outline="rgba(0, 128, 0, 0.85) thick solid";
                 sessionStorage.setItem("currentPlanet", planet);
                 showLines();
+                // Check for events
+                checkEvent(planet);
             } else {
                 console.log("Cannot travel to non-neighboring planets");
             }
