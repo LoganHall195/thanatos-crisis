@@ -505,12 +505,12 @@
                 setTimeout(function(){
                 $('.page-loader').fadeOut('slow');
                 },5); //change back to 3500 before release
+
+                
+                //openInventory(); // Remove after editing inventory items
+                worldSeed(sessionStorage.getItem("seed"));
             });
             window.onresize = function(){window.location.reload();}
-            function closeIFrame(){
-                $('#minigameIframe').remove();
-            }
-            openInventory() // Remove after editing inventory items
         </script>
         <script> // Debug
             function debug(command){
@@ -534,6 +534,42 @@
                     }
                 }
             }
+        </script>
+        <script>
+            function worldSeed(sessionSeed){
+                var difficulty = sessionStorage.getItem("difficulty");
+                var lastPos = sessionStorage.getItem("currentPlanet");
+                difficulty = 1;// For testing
+                lastPos = null;// For testing
+                if (sessionSeed==null){
+                    // Generating Seed
+                    var sb = Math.floor((Math.random()*2)+1); // End Game Boss
+                    var s1 = Math.floor((Math.random()*5)+1); // Sector 1 Variant
+                    var s2 = Math.floor((Math.random()*5)+1); // Sector 2 Variant
+                    var s3 = Math.floor((Math.random()*5)+1); // Sector 3 Variant
+                    var s4 = Math.floor((Math.random()*5)+1); // Sector 4 Variant
+                    var seed = (""+sb+s1+s2+s3+s4);
+                    console.log(seed); //console.log(seed.substring(0,1));
+                    sessionStorage.setItem("seed", seed);
+                } 
+                if (lastPos==null){ // If no session save found
+                    console.log("Save Not Found")
+                    switch(difficulty){ // Set spawn location based on faction select
+                        case 1:
+                            forcetravelTo("Hymera");
+                            break;
+                        case 2:
+                            forcetravelTo("Drybone");
+                            break;
+                        case 3:
+                            forcetravelTo("Meissa");
+                            break;
+                    }
+                } else {
+                    forcetravelTo(lastPos);
+                }
+                }
+
         </script>
     </body>
 </html>

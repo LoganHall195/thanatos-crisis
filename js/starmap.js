@@ -117,6 +117,18 @@
                 console.log("Cannot travel to non-neighboring planets");
             }
         }
+        function forcetravelTo(planet) {
+            // Test: Is Neighbor Planet?
+            console.log("Traveling to "+ planet +"!");
+            // Clear Last Planet
+            let lastPlanet = sessionStorage.getItem("currentPlanet");
+            document.getElementById(lastPlanet).children[0].style.outline="";
+            hideLines();
+            // Set New Planet
+            document.getElementById(planet).children[0].style.outline="rgba(0, 128, 0, 0.85) thick solid";
+            sessionStorage.setItem("currentPlanet", planet);
+            showLines();
+        }
         // Check if neighboring planet
         function checkHighwayLocations(location1, location2) {
             const highways = document.getElementById("highways");
