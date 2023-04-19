@@ -539,36 +539,77 @@
             function worldSeed(sessionSeed){
                 var difficulty = sessionStorage.getItem("difficulty");
                 var lastPos = sessionStorage.getItem("currentPlanet");
-                difficulty = 1;// For testing
-                lastPos = null;// For testing
-                if (sessionSeed==null){
-                    // Generating Seed
-                    var sb = Math.floor((Math.random()*2)+1); // End Game Boss
-                    var s1 = Math.floor((Math.random()*5)+1); // Sector 1 Variant
-                    var s2 = Math.floor((Math.random()*5)+1); // Sector 2 Variant
-                    var s3 = Math.floor((Math.random()*5)+1); // Sector 3 Variant
-                    var s4 = Math.floor((Math.random()*5)+1); // Sector 4 Variant
-                    var seed = (""+sb+s1+s2+s3+s4);
-                    console.log(seed); //console.log(seed.substring(0,1));
-                    sessionStorage.setItem("seed", seed);
-                } 
+                difficulty = '1';// For testing
+                //lastPos = null;// For testing
+
+                // Populate Events
+                var faction1Planets=["Aslan","Seidon","Valera","Hymera","Starholm","Bioholm","Kaelda","Caema","Serenity","Lumera","Crysholm","Thyrmae"];
+                var faction2Planets=["KG-348", "Irulan", "Acheron", "Cerulan", "Thedus", "Cigni", "Neo Eden", "LV-223", "Providence", "Caladan", "LV-178"];
+                var faction3Planets=["Betelgeuse", "Alnitak", "Alnilam", "Mintaka", "Omni Prime", "Meissa", "Theta-1E", "Hatsya", "Rigel", "Theta-1B", "Fury-161"];
+                var faction4Planets=["Forge", "New Hope", "Ionus", "Liberty", "Haven", "XT-5", "Sky Ark", "Drybone", "XT-0", "Theta-1C", "Eos", "XT-3"];
+                var allFactionsPlanets=[faction1Planets,faction2Planets,faction3Planets,faction4Planets];
+
+                // Ensure Spawn
                 if (lastPos==null){ // If no session save found
                     console.log("Save Not Found")
-                    switch(difficulty){ // Set spawn location based on faction select
-                        case 1:
+                    switch(difficulty){ // Set spawn location based on faction select 
+                        case '1':
                             forcetravelTo("Hymera");
+                            faction1Planets.splice(faction1Planets.findIndex(el => el == "Hymera"), 1);
                             break;
-                        case 2:
-                            forcetravelTo("Drybone");
+                        case '2':
+                            forcetravelTo("Acheron");
+                            faction2Planets.splice(faction2Planets.findIndex(el => el == "Acheron"), 1);
+                            
                             break;
-                        case 3:
+                        case '3':
                             forcetravelTo("Meissa");
+                            faction3Planets.splice(faction3Planets.findIndex(el => el == "Meissa"), 1);
+                            
                             break;
                     }
+                    sessionStorage.setItem("faction", difficulty);
                 } else {
                     forcetravelTo(lastPos);
                 }
+
+                // Ensure Seed
+                if (sessionSeed==null){
+                    // Generating Seed
+                    var seed = Math.floor((Math.random()*eval("faction"+sessionStorage.getItem("faction")+"Planets.length"))+1);
+                    sessionStorage.setItem("seed", seed);
+                } 
+
+                // Faction Events - Last event may be cut depending on player start
+                //var exampleEvents=["battle", "battle", "asteroid"] //3 events
+                var faction1Events=["faction1Events"] //12 events
+                var faction2Events=["faction2Events"] //11 events
+                var faction3Events=["faction3Events"] //11 events
+                var faction4Events=["faction4Events"] //12 events
+
+                // Apply Seed Randomizer
+                for (i=0; i<sessionStorage.getItem("seed"); i++){ // Faction 1
+                    var temp=faction1Events[faction1Events.length-1];
+                    faction1Events.splice(faction1Events.length-1,1);
+                    faction1Events.unshift(temp)
                 }
+                for (i=0; i<sessionStorage.getItem("seed"); i++){ // Faction 2
+                    var temp=faction2Events[faction2Events.length-1];
+                    faction2Events.splice(faction2Events.length-1,1);
+                    faction2Events.unshift(temp)
+                }
+                for (i=0; i<sessionStorage.getItem("seed"); i++){ // Faction 3
+                    var temp=faction3Events[faction3Events.length-1];
+                    faction3Events.splice(faction3Events.length-1,1);
+                    faction3Events.unshift(temp)
+                }
+                for (i=0; i<sessionStorage.getItem("seed"); i++){ // Faction 4
+                    var temp=faction4Events[faction4Events.length-1];
+                    faction4Events.splice(faction4Events.length-1,1);
+                    faction4Events.unshift(temp)
+                }
+                console.log(faction1Events, faction2Events, faction3Events, faction4Events);
+            }
 
         </script>
     </body>

@@ -102,7 +102,7 @@ function populateGrid(items, list) {
     quantity.style = 'margin-left: 24; margin-top: -15; color: black;';
   }
   for (let i = 0; i < itemList.length; i++) {
-    console.log(itemList[i]);
+    //console.log(itemList[i]);
   }
 }
 

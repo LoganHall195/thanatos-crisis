@@ -1,4 +1,5 @@
-function popupEntry() {
+function popupEntry(faction) {
+    sessionStorage.setItem("difficulty", faction);
     let popupWindow = document.getElementById('beginGameEntry');
     let charSelect = document.getElementById('classSelection');
     charSelect.style.opacity = '0';
