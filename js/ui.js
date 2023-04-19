@@ -109,3 +109,42 @@ function populateGrid(items, list) {
 window.onload = function () {
   populateGrid(inventory, itemList);
 };
+
+function debug(command){
+  if (command=="asteroid"){
+      if (document.getElementById("minigameIframe").style.visibility=="hidden") {
+          document.getElementById("minigameIframe").style.visibility="visible"
+          document.getElementById("minigameIframe").src="minigames/asteroid.html"
+      }
+      else {
+          document.getElementById("minigameIframe").style.visibility="hidden"
+          document.getElementById("minigameIframe").src=""
+      }
+  } else if (command=="battle"){
+      if (document.getElementById("minigameIframe").style.visibility=="hidden") {
+          document.getElementById("minigameIframe").style.visibility="visible"
+          document.getElementById("minigameIframe").src="minigames/battle.html"
+      }
+      else {
+          document.getElementById("minigameIframe").style.visibility="hidden"
+          document.getElementById("minigameIframe").src=""
+      }
+  }
+  var cmdDown = false;
+
+  document.body.addEventListener('keydown', function(event) {
+  var key = event.keyCode || event.charCode || 0;
+  if ([192].indexOf(key) !== -1) {
+    cmdDown = true;
+    document.getElementById("debug").style.visibility="visible";
+  }   
+  });
+
+  document.body.addEventListener('keyup', function(event) {
+  var key = event.keyCode || event.charCode || 0;
+  if ([192].indexOf(key) !== -1) {
+    cmdDown = false;
+    document.getElementById("debug").style.visibility="hidden";
+  }
+  });
+}

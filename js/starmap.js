@@ -142,3 +142,131 @@
 
             return false;
         }
+        
+        function worldSeed(sessionSeed){
+            var difficulty = sessionStorage.getItem("difficulty");
+            var lastPos = sessionStorage.getItem("currentPlanet");
+            
+            // For testing
+            difficulty = '1'; sessionStorage.setItem("difficulty", difficulty);
+            //lastPos = null; //sessionStorage.setItem("currentPlanet", lastPos);
+
+            // Populate Events
+            var faction1Planets = ["Aslan","Seidon","Valera","Hymera","Starholm","Bioholm","Kaelda","Caema","Serenity","Lumera","Crysholm","Thyrmae"];
+            var faction2Planets = ["KG-348", "Irulan", "Acheron", "Cerulan", "Thedus", "Cigni", "Neo Eden", "LV-223", "Providence", "Caladan", "LV-178"];
+            var faction3Planets = ["Betelgeuse", "Alnitak", "Alnilam", "Mintaka", "Omni Prime", "Meissa", "Theta-1E", "Hatsya", "Rigel", "Theta-1B", "Fury-161"];
+            var faction4Planets = ["Forge", "New Hope", "Ionus", "Liberty", "Haven", "XT-5", "Sky Ark", "Drybone", "XT-0", "Theta-1C", "Eos", "XT-3"];
+            console.log(faction1Planets);
+            sessionStorage.setItem("allFactionsPlanets",[faction1Planets,faction2Planets,faction3Planets,faction4Planets]);
+            var allFactionsPlanets = sessionStorage.getItem("allFactionsPlanets");
+
+            // Ensure Spawn
+            if (lastPos==null){ // If no session save found
+                console.log("Save Not Found")
+                switch(difficulty){ // Set spawn location based on faction select 
+                    case '1':
+                        forcetravelTo("Hymera");
+                        faction1Planets.splice(faction1Planets.findIndex(el => el == "Hymera"), 1);
+                        break;
+                    case '2':
+                        forcetravelTo("Acheron");
+                        faction2Planets.splice(faction2Planets.findIndex(el => el == "Acheron"), 1);
+                        
+                        break;
+                    case '3':
+                        forcetravelTo("Meissa");
+                        faction3Planets.splice(faction3Planets.findIndex(el => el == "Meissa"), 1);
+                        
+                        break;
+                }
+            } else {
+                forcetravelTo(lastPos);
+            }
+
+            // Ensure Seed
+            if (sessionSeed==null){
+                // Generating Seed
+                var seed = Math.floor((Math.random()*eval("faction"+sessionStorage.getItem("difficulty")+"Planets.length"))+1);
+                seed = 0; // Testing
+                sessionStorage.setItem("seed", seed);
+            } 
+
+            // Faction Events - Last event may be cut depending on player start
+            //var exampleEvents=["battle", "battle", "asteroid"] //3 events
+            var faction1Events=["battle", "", "", "", "", "", "", "", "", "", "", ""] //12 events
+            var faction2Events=["", "", "", "", "", "", "", "", "", "", ""] //11 events
+            var faction3Events=["", "", "", "", "", "", "", "", "", "", ""] //11 events
+            var faction4Events=["", "", "", "", "", "", "", "", "", "", "", ""] //12 events
+
+            // Apply Seed Randomizer
+            for (i=0; i<sessionStorage.getItem("seed"); i++){ // Faction 1
+                var temp=faction1Events[faction1Events.length-1];
+                faction1Events.splice(faction1Events.length-1,1);
+                faction1Events.unshift(temp)
+            }
+            for (i=0; i<sessionStorage.getItem("seed"); i++){ // Faction 2
+                var temp=faction2Events[faction2Events.length-1];
+                faction2Events.splice(faction2Events.length-1,1);
+                faction2Events.unshift(temp)
+            }
+            for (i=0; i<sessionStorage.getItem("seed"); i++){ // Faction 3
+                var temp=faction3Events[faction3Events.length-1];
+                faction3Events.splice(faction3Events.length-1,1);
+                faction3Events.unshift(temp)
+            }
+            for (i=0; i<sessionStorage.getItem("seed"); i++){ // Faction 4
+                var temp=faction4Events[faction4Events.length-1];
+                faction4Events.splice(faction4Events.length-1,1);
+                faction4Events.unshift(temp)
+            }
+            console.log(faction1Events, faction2Events, faction3Events, faction4Events);
+            
+            sessionStorage.setItem("faction1Planets",JSON.stringify(faction1Planets));
+            sessionStorage.setItem("faction2Planets",JSON.stringify(faction2Planets));
+            sessionStorage.setItem("faction3Planets",JSON.stringify(faction3Planets));
+            sessionStorage.setItem("faction4Planets",JSON.stringify(faction4Planets));
+            sessionStorage.setItem("faction1Events",JSON.stringify(faction1Events));
+            sessionStorage.setItem("faction2Events",JSON.stringify(faction2Events));
+            sessionStorage.setItem("faction3Events",JSON.stringify(faction3Events));
+            sessionStorage.setItem("faction4Events",JSON.stringify(faction4Events));
+        }
+
+        function checkEvent(planet){
+            var faction1Planets = JSON.parse(sessionStorage.getItem("faction1Planets"));
+            var faction2Planets = JSON.parse(sessionStorage.getItem("faction2Planets"));
+            var faction3Planets = JSON.parse(sessionStorage.getItem("faction3Planets"));
+            var faction4Planets = JSON.parse(sessionStorage.getItem("faction4Planets"));
+            var faction1Events = JSON.parse(sessionStorage.getItem("faction1Events"));
+            var faction2Events = JSON.parse(sessionStorage.getItem("faction2Events"));
+            var faction3Events = JSON.parse(sessionStorage.getItem("faction3Events"));
+            var faction4Events = JSON.parse(sessionStorage.getItem("faction4Events"));
+            
+            console.log(faction1Planets)
+            
+            for (i=1; i<4; i++){
+                var index = eval("faction" + i + "Planets.indexOf(\""+planet+"\");");
+                //console.log(faction1Planets.indexOf("Aslan"))
+                if (index==-1){
+                    console.log("Planet not found in array")
+                } else {
+                    event = eval("faction" + i + "Events[" + index + "]");
+                    console.log("Planet: " + planet + "|" + "Faction: " + i + 
+                                "|" + "Event: " + event);
+                    switch(event){
+                        case "battle":
+                            console.log("Battle Initiated!");
+                            debug("battle");
+                            sessionStorage.setItem("activeEvent", "battle");
+                            break;
+                        case "asteroids":
+                            console.log("Asteroids detected!");
+                            debug("asteroid");
+                            sessionStorage.setItem("activeEvent", "battle");
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+            
+        }
