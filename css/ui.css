@@ -34,7 +34,7 @@
 }
 
 #minigameIframe{
-  
+  background: rgba(5, 5, 5, 0.7);
   top: 0%;
   left: 50%;
   -ms-transform: translate(-50%, -50%);

@@ -1,23 +1,6 @@
-<html lang="en"><head>
-    <meta charset="UTF-8">
-    
-  
-      <link rel="apple-touch-icon" type="image/png" href="https://cpwebassets.codepen.io/assets/favicon/apple-touch-icon-5ae1a0698dcc2402e9712f7d01ed509a57814f994c660df9f7a952f3060705ee.png">
-  
-      <meta name="apple-mobile-web-app-title" content="CodePen">
-  
-      <link rel="shortcut icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/favicon-aec34940fbc1a6e787974dcd360f2c6b63348d4b1f4e06c77743096d55480f33.ico">
-  
-      <link rel="mask-icon" type="image/x-icon" href="https://cpwebassets.codepen.io/assets/favicon/logo-pin-b4b4269c16397ad2f0f7a01bcdf513a1994f4c94b8af2f191c09eb0d601762b1.svg" color="#111">
-  
-  
-  
-    
-    <title>CodePen - Asteroid Minigame</title>
-    
-    
-    
-    
+<html>
+  <head>
+ 
   <style>
   :root {
     --base: #ffffff;
@@ -36,6 +19,8 @@
     font-family: 'Press Start 2P', sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    margin-top: 0px;
+    margin-left: 0px;
   }
   
   canvas {
@@ -51,7 +36,7 @@
     margin-bottom: 2rem;
   }
   
-  li {
+  p {
     color: var(--highlight);
     font-size: .8rem;
     margin-bottom: 1em;
@@ -81,7 +66,6 @@
   
   .dialogue {
     align-items: center;
-    background-color: rgba(0, 0, 0, .85);
     bottom: 0;
     display: flex;
     justify-content: center;
@@ -155,21 +139,18 @@
   <body translate="no">
     <div class="dialogue">
     <div class="dialogue__content">
-      <h1>Space Shooter</h1>
-      <ul>
-        <li>Use the <span class="key key--arrow">←</span> and <span class="key key--arrow">→</span> keys to move.</li>
-        <li>Use <span class="key">spacebar</span> to fire lasers.</li>
+      <h1>Asteroid Shooter</h1>
+        <p>Use the <span class="key key--arrow">←</span> and <span class="key key--arrow">→</span> or <span class="key key--arrow">a</span> and <span class="key key--arrow">d</span> keys to move.</p>
+        <p>Use <span class="key">spacebar</span> to fire lasers.</p>
         <!-- <li>Try not to die.</li> -->
       </ul>
       <button>Start</button>
     </div>
   </div>
   <ul class="hud hud--hidden">
-    <li class="hud__score">Score: <span>100</span></li>
+    <p class="hud__score" style="color: white;">Score: <span>200</span></p>
     <!-- <li class="hud__lives">Coming soon</li> -->
   </ul>
-      <script src="https://cpwebassets.codepen.io/assets/common/stopExecutionOnTimeout-2c7831bb44f98c1391d6a4ffda0e1fd302503391ca806e7fcc7b9b87197aec26.js"></script>
-  
     
         <script id="rendered-js">
   const DEV_MODE = false;
@@ -186,7 +167,7 @@
   let gameStarted = false;
   let speedMultiplier;
   let enemySeedFrameInterval;
-  let score = 100;
+  let score = 200;
   let tick = 0;
   let laserTick = 0;
   
@@ -239,8 +220,10 @@
   Ship.prototype.onKeyDown = function (e) {
     if (ship.active) {
       if (e.keyCode === 39) this.right = true;else
-      if (e.keyCode === 37) this.left = true;
-  
+      if (e.keyCode === 37) this.left = true;else
+      if (e.keyCode === 68) this.right = true;else
+      if (e.keyCode === 65) this.left = true;
+
       if (e.keyCode == 32 && !this.shooting) {
         this.shooting = true;
         laserTick = 0;
@@ -251,6 +234,8 @@
   Ship.prototype.onKeyUp = function (e) {
     if (e.key === 'ArrowRight') this.right = false;else
     if (e.key === 'ArrowLeft') this.left = false;else
+    if (e.key === 'd') this.right = false;else
+    if (e.key === 'a') this.left = false;else
     if (e.keyCode == 32) this.shooting = false;
   };
   
@@ -284,8 +269,8 @@
     this.height = this.width;
     this.x = randomBetween(0, stage.width - this.width);
     this.y = -this.radius * 2;
-    this.color = options !== undefined && options.color ? options.color : 'white';
-    this.speed = 2;
+    this.color = options !== undefined && options.color ? options.color : '#54381c';
+    this.speed = 10;
     this.active = true;
   }
   
@@ -296,7 +281,7 @@
   
   Enemy.prototype.draw = function () {
     if (DEV_MODE) {
-      ctx.fillStyle = 'skyblue';
+      ctx.fillStyle = 'pink';
       ctx.fillRect(this.x, this.y, this.width, this.width);
     }
   
@@ -333,7 +318,7 @@
   
           // increase enemy speed and frequency of enemy spawns
           speedMultiplier += 0.025;
-          if (enemySeedFrameInterval > 20) {
+          if (enemySeedFrameInterval > 10) {
             enemySeedFrameInterval -= 2;
           }
   
@@ -362,7 +347,7 @@
             ship.active = true;
             speedMultiplier = 1;
             enemySeedFrameInterval = 100;
-            score = 100;
+            score = 200;
             scoreNode.textContent = score;
           }, 2000);
         }
@@ -432,7 +417,7 @@
   
       // background
       ctx.save();
-      ctx.fillStyle = '#222222';
+      //ctx.fillStyle = '#222222';
       ctx.fillRect(0, 0, stage.width, stage.height);
       ctx.restore();
   
@@ -454,7 +439,7 @@
       if (ship.active && ship.shooting) {
         if (laserTick === 0 || laserTick % 10 === 0) {
           let laser = new Laser({
-            color: 'skyblue',
+            color: 'red',
             x: ship.x + ship.radius - 3 });
   
           lasers.push(laser);
@@ -506,16 +491,15 @@
   onResize();
   
   // start the ship off-screen:
-  ship = new Ship({ color: '#ff9d00', x: -100, y: -100 });
+  ship = new Ship({ color: 'skyblue', x: -100, y: -100 });
   
   // set up some ridiculous enemy speeds for the intro:
-  speedMultiplier = 6,
-  enemySeedFrameInterval = 20;
+  speedMultiplier = 3,
+  enemySeedFrameInterval = 5;
   
   playing = true;
   render();
-  //# sourceURL=pen.js
-      </script><canvas width="1286" height="498"></canvas>
+      </script><canvas width="1300" height="510"></canvas>
   
     
   
