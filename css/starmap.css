@@ -81,3 +81,59 @@ h1 {
     opacity: 0;
   }
 }
+
+body{
+  /* No Select Text */
+  -webkit-user-select:none;
+  -moz-user-select:-moz-none;
+  -ms-user-select:none;
+  user-select:none;
+}
+
+.faction0{
+  background-color:transparent; border-radius:50px;
+}
+
+.faction1{
+  background-color:transparent; border-radius:50px;
+  box-shadow: 0 0 8px #4c64ea, inset 0 0 8px #4c64ea;
+  -webkit-animation: faction1-pulse 2s linear 1s infinite;
+}
+@-webkit-keyframes faction1-pulse {
+  0% { box-shadow:0 0 8px #4c64ea, inset 0 0 8px #4c64ea; }
+  50% { box-shadow:0 0 16px #4c64ea, inset 0 0 14px #4c64ea; }
+  100% { box-shadow:0 0 8px #4c64ea, inset 0 0 8px #4c64ea; }
+}
+
+.faction2{
+  background-color:transparent; border-radius:50px;
+  box-shadow: 0 0 8px #ebeb4d, inset 0 0 8px #ebeb4d;
+  -webkit-animation: faction2-pulse 2s linear 1s infinite;
+}
+@-webkit-keyframes faction2-pulse {
+  0% { box-shadow:0 0 8px #ebeb4d, inset 0 0 8px #ebeb4d; }
+  50% { box-shadow:0 0 16px #ebeb4d, inset 0 0 14px #ebeb4d; }
+  100% { box-shadow:0 0 8px #ebeb4d, inset 0 0 8px #ebeb4d; }
+}
+
+.faction3{
+  background-color:transparent; border-radius:50px;
+  box-shadow: 0 0 8px #c94deb, inset 0 0 8px #c94deb;
+  -webkit-animation: faction3-pulse 2s linear 1s infinite;
+}
+@-webkit-keyframes faction3-pulse {
+  0% { box-shadow:0 0 8px #c94deb, inset 0 0 8px #c94deb; }
+  50% { box-shadow:0 0 16px #c94deb, inset 0 0 14px #c94deb; }
+  100% { box-shadow:0 0 8px #c94deb, inset 0 0 8px #c94deb; }
+}
+
+.faction4{
+  background-color:transparent; border-radius:50px;
+  box-shadow: 0 0 8px #eb584d, inset 0 0 8px #eb584d;
+  -webkit-animation: faction4-pulse 2s linear 1s infinite;
+}
+@-webkit-keyframes faction4-pulse {
+  0% { box-shadow:0 0 8px #eb584d, inset 0 0 8px #eb584d; }
+  50% { box-shadow:0 0 16px #eb584d, inset 0 0 14px #eb584d; }
+  100% { box-shadow:0 0 8px #eb584d, inset 0 0 8px #eb584d; }
+}
