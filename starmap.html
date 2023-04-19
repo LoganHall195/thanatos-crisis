@@ -427,10 +427,12 @@
         </div>
 
         <div id="ui">
-            <div id ="debug">
+            <div id ="debug" style="visibility: hidden;">
                 <h3>Debug Menu</h3>
+                
                 <button onclick="debug('asteroid')">-> asteroid</button> <br>
                 <button onclick="debug('battle')">-> battle</button>
+
             </div>
 
             <div id="minigame">
@@ -535,6 +537,23 @@
                     }
                 }
             }
+            var cmdDown = false;
+
+            document.body.addEventListener('keydown', function(event) {
+            var key = event.keyCode || event.charCode || 0;
+            if ([192].indexOf(key) !== -1) {
+                cmdDown = true;
+                document.getElementById("debug").style.visibility="visible";
+            }   
+            });
+
+            document.body.addEventListener('keyup', function(event) {
+            var key = event.keyCode || event.charCode || 0;
+            if ([192].indexOf(key) !== -1) {
+                cmdDown = false;
+                document.getElementById("debug").style.visibility="hidden";
+            }
+            });
         </script>
         <script>
             function worldSeed(sessionSeed){

@@ -78,7 +78,7 @@
       #compShip,
       #yourShip {
         width: 500px;
-        height: 400px;
+        height: 350px;
         display: inline-block;
         background-position: center;
         background-size: cover;
@@ -228,7 +228,7 @@
     <div
       id="yourShip"
       style="
-        background-image: url(https://media.discordapp.net/attachments/847635333871829052/1097607433989410896/you-removebg-preview.png);
+        background-image: url(../images/MillionthVector/Ships/spaceshipspr.png); background-repeat: no-repeat; background-size:80%;
       "
     >
       <img
@@ -245,7 +245,7 @@
     <div
       id="compShip"
       style="
-        background-image: url(https://media.discordapp.net/attachments/847635333871829052/1097606671704010843/enemy-removebg-preview.png);
+        background-image: url(../images/MillionthVector/Ships/independent/alien1.png); background-repeat: no-repeat; background-size:100%;;
       "
     >
       <img
@@ -344,7 +344,7 @@
           compLaser.className = '';
           yourLaser.style.visibility = 'hidden';
           compLaser.style.visibility = 'hidden';
-          res = 'Game Over, you tied!';
+          res = 'Battle Over, you tied!';
           attackButton.disabled = true;
           counterButton.disabled = true;
           healButton.disabled = true;
@@ -358,7 +358,7 @@
           compLaser.className = '';
           yourLaser.style.visibility = 'hidden';
           compLaser.style.visibility = 'hidden';
-          res = 'Game Over, you lost!';
+          res = 'Battle Over, you lost!';
           attackButton.disabled = true;
           counterButton.disabled = true;
           healButton.disabled = true;
@@ -371,7 +371,7 @@
           compLaser.className = '';
           yourLaser.style.visibility = 'hidden';
           compLaser.style.visibility = 'hidden';
-          res = 'Game Over, you won!';
+          res = 'Battle Over, you won!';
           attackButton.disabled = true;
           counterButton.disabled = true;
           healButton.disabled = true;
