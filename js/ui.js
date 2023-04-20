@@ -52,7 +52,7 @@ let itemList = [
     name: 'Scrap',
     description: 'Salvaged scrap from an ship. \r\nCan be sold for Thanite',
     type: 'Sellable Item',
-    image: 'scrap metal re.png',
+    image: 'scrap.png',
   },
   {
     name: 'Alien Relic',
@@ -86,20 +86,20 @@ let itemList = [
     description:
       'An ancient map of the galaxy. Shows location of treasure among the stars.',
     type: 'Star Map',
-    image: 'scrap metal re.png',
+    image: 'star map.png',
   },
   {
     name: 'Strange Substance',
     description: 'A strange substance of unknown origin',
     type: 'Quest Item',
-    image: 'scrap metal re.png',
+    image: 'strange sub.png',
   },
   {
     name: 'Weapon Fragments',
     description:
       'Fragments of an ancient and powerful weapon, could come in handy if all fragments are retrieved',
     type: 'Weapon',
-    image: 'scrap metal re.png',
+    image: 'weapon fragments.png',
   },
   {
     name: 'Shield Recharge',
@@ -110,8 +110,8 @@ let itemList = [
   {
     name: 'Hull Repair Nanites',
     description: "Nanites programmed to repair damage to your ship's hull",
-    type: 'Weapon',
-    image: 'scrap metal re.png',
+    type: 'Usable Item',
+    image: 'nanites.png',
   },
 ];
 // Player Inventory
