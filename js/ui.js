@@ -46,127 +46,117 @@ function gridSelect(id) {
   descP.style = 'color: white';
   document.getElementById('descDisplay').appendChild(descP);
 }
+
 // Item List
 let itemList = [
   {
     name: 'Scrap',
     description: 'Salvaged scrap from an ship. \r\nCan be sold for Thanite',
     type: 'Sellable Item',
-    image: 'scrap.png',
   },
   {
     name: 'Alien Relic',
     description: 'A relic from a different race. Can be sold for Thanite',
     type: 'Sellable Item',
-    image: 'alien relic.png',
   },
   {
     name: 'Valuable Ores',
     description:
       'Rare ores sought highly throughout the galaxy. Can be sold for Thanite',
     type: 'Sellable Item',
-    image: 'valuable ores.png',
   },
   {
     name: 'High Tech Weapon System',
     description:
       'A higher performance weapon system. If in inventory, player will deal extra damage in battle',
     type: 'Ship Mod',
-    image: 'htws.png',
   },
   {
     name: 'High Tech Shield System',
     description:
       'A higher performance shield system. If in inventory, player will have boosted shields in battle',
     type: 'Ship Mod',
-    image: 'htss.png',
   },
   {
     name: 'Ancient Star Map',
     description:
       'An ancient map of the galaxy. Shows location of treasure among the stars.',
     type: 'Star Map',
-    image: 'star map.png',
   },
   {
     name: 'Strange Substance',
     description: 'A strange substance of unknown origin',
     type: 'Quest Item',
-    image: 'strange sub.png',
   },
   {
     name: 'Weapon Fragments',
     description:
       'Fragments of an ancient and powerful weapon, could come in handy if all fragments are retrieved',
     type: 'Weapon',
-    image: 'weapon fragments.png',
   },
   {
     name: 'Shield Recharge',
     description: 'Recharge your shields if they are depleted',
     type: 'Ship Mod',
-    image: 'shield recharge re.png',
   },
   {
     name: 'Hull Repair Nanites',
     description: "Nanites programmed to repair damage to your ship's hull",
     type: 'Usable Item',
-    image: 'nanites.png',
   },
 ];
 // Player Inventory
-let inventory = [
-  {
-    name: 'Scrap',
-    quantity: 1,
-  },
-  {
-    name: 'Alien Relic',
-    quantity: 1,
-  },
-  {
-    name: 'Valuable Ores',
-    quantity: 1,
-  },
-  {
-    name: 'High Tech Weapon System',
-    quantity: 1,
-  },
-  {
-    name: 'High Tech Shield System',
-    quantity: 5,
-  },
-  {
-    name: 'Ancient Star Map',
-    quantity: 1,
-  },
-  {
-    name: 'Strange Substance',
-    quantity: 1,
-  },
-  {
-    name: 'Weapon Fragments',
-    quantity: 1,
-  },
-  {
-    name: 'Shield Recharge',
-    quantity: 1,
-  },
-  {
-    name: 'Hull Repair Nanites',
-    quantity: 10,
-  },
-];
+let inventory = [];
+
+// Add Item/Adjust Item Quantity
+function addItem(name, quantity) {
+  // Find the item in the array with the matching name
+  let foundItem = inventory.find((item) => item.name === name);
+
+  if (foundItem) {
+    // If the item is found, update the quantity
+    foundItem.quantity += quantity;
+  } else {
+    // If the item is not found, add a new object with the name and quantity
+    inventory.push({ name, quantity });
+  }
+}
+
+function removeItem(name, quantity) {
+  // Find the item in the array with the matching name
+  let foundItem = inventory.find((item) => item.name === name);
+  console.log('foundItem: ' + foundItem.name);
+  if (foundItem.quantity >= quantity) {
+    // If the item is found, update the quantity
+    foundItem.quantity -= quantity;
+
+    if (foundItem.quantity == 0) {
+      // If the item is not found, add a new object with the name and quantity
+      inventory = inventory.filter((item) => item.name !== foundItem.name);
+    }
+  } else {
+    console.log('Not Enough ' + foundItem.name);
+  }
+}
+
+// addItem('Scrap', 5);
+// removeItem('Scrap', 5);
+// addItem('Alien Relic', 5);
+// addItem('Scrap', 1);
+// removeItem('Scrap', 1);
+// addItem('High Tech Shield System', 10);
+
 // Populate Grid
 function populateGrid(items, list) {
   const gridItems = document.querySelectorAll('.grid-item');
   for (let i = 0; i < items.length; i++) {
+    console.log('items Length: ' + items.length);
     const item = items[i];
+    console.log(list[i].image);
     const gridItem = gridItems[i];
-    const result = list.find((item) => item.name);
 
     const image = document.createElement('img');
-    image.src = './images/custom/items/' + list[i].image;
+    image.src = './images/custom/items/' + item.name + '.png';
     image.alt = item.name;
     image.style = 'width: 65px; margin-left: -30px; margin-top: -33px';
     gridItem.appendChild(image);
