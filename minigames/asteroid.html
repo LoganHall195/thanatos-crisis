@@ -327,7 +327,8 @@
           if (score <= 0) {
             score = 0;
             playing = false;
-            parent.debug("asteroid");
+            sessionStorage.setItem("activeStatus","end");
+            window.parent.document.getElementById('minigameIframe').src = "minigames/context.html";
           }
           scoreNode.textContent = score;
         }

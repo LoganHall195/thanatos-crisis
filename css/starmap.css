@@ -137,3 +137,14 @@ body{
   50% { box-shadow:0 0 16px #eb584d, inset 0 0 14px #eb584d; }
   100% { box-shadow:0 0 8px #eb584d, inset 0 0 8px #eb584d; }
 }
+
+#mask {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 3; /* some high z-index */
+  width: 100vw;
+  height: 100vh;
+  opacity: 0;
+  user-select: none; /* prevents double clicking from highlighting entire page */
+}

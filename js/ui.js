@@ -110,26 +110,27 @@ let inventory = [];
 
 // Add Item/Adjust Item Quantity
 function addItem(name, quantity) {
+  console.log("Adding " + quantity + "x "+name+".")
   // Find the item in the array with the matching name
   let foundItem = inventory.find((item) => item.name === name);
-
   if (foundItem) {
     // If the item is found, update the quantity
+    //console.log("Item found in player inventory")
     foundItem.quantity += quantity;
+    console.log("Player has "+foundItem.quantity+" of "+foundItem.name);
   } else {
     // If the item is not found, add a new object with the name and quantity
-    inventory.push({ name, quantity });
+    inventory.push({ name: name, quantity: quantity });
+    console.log(inventory)
   }
 }
 
 function removeItem(name, quantity) {
   // Find the item in the array with the matching name
   let foundItem = inventory.find((item) => item.name === name);
-  console.log('foundItem: ' + foundItem.name);
   if (foundItem.quantity >= quantity) {
     // If the item is found, update the quantity
     foundItem.quantity -= quantity;
-
     if (foundItem.quantity == 0) {
       // If the item is not found, add a new object with the name and quantity
       inventory = inventory.filter((item) => item.name !== foundItem.name);
@@ -139,18 +140,34 @@ function removeItem(name, quantity) {
   }
 }
 
-// addItem('Scrap', 5);
+function calcRewards(reward){
+  if(reward!=null){
+    const rewards = reward.split(',');
+    console.log(rewards);
+    for (i=0; i<rewards.length/2; i+=2){
+        //console.log("addItem("+rewards[i].toString()+", "+parseInt(rewards[i+1])+");")
+        addItem(rewards[i], rewards[i+1]);
+    }
+    populateGrid(inventory, itemList);
+  }
+}
+
+ addItem('Scrap', 5);
 // removeItem('Scrap', 5);
 // addItem('Alien Relic', 5);
 // addItem('Scrap', 1);
 // removeItem('Scrap', 1);
-// addItem('High Tech Shield System', 10);
+//addItem('High Tech Shield System', 10);
+//console.log(inventory)
+
 
 // Populate Grid
 function populateGrid(items, list) {
-  const gridItems = document.querySelectorAll('.grid-item');
+  //Reset gridContainer before repopulating
+  document.getElementById("gridContainer").innerHTML=gridContent;
+  const gridItems = document.querySelectorAll('.grid-item'); // Define gridItems
   for (let i = 0; i < items.length; i++) {
-    console.log('items Length: ' + items.length);
+    //console.log('items Length: ' + items.length);
     const item = items[i];
     console.log(list[i].image);
     const gridItem = gridItems[i];
@@ -173,29 +190,46 @@ function populateGrid(items, list) {
 }
 
 window.onload = function () {
+  gridContent = document.getElementById("gridContainer").innerHTML;
   populateGrid(inventory, itemList);
 };
 
 function debug(command) {
-  if (command == 'asteroid') {
-    if (
-      document.getElementById('minigameIframe').style.visibility == 'hidden'
-    ) {
+  //console.log(command)
+  if (command == 'initialize') {
+    if (document.getElementById('minigameIframe').style.visibility == 'hidden') {
       document.getElementById('minigameIframe').style.visibility = 'visible';
-      document.getElementById('minigameIframe').src = 'minigames/asteroid.html';
+      document.getElementById('mask').style.visibility = 'visible';
     } else {
       document.getElementById('minigameIframe').style.visibility = 'hidden';
       document.getElementById('minigameIframe').src = '';
+      document.getElementById('mask').style.visibility = 'hidden';
+    }
+  } else if (command == 'asteroid') {
+    if (document.getElementById('minigameIframe').style.visibility == 'hidden') {
+      document.getElementById('minigameIframe').style.visibility = 'visible';
+      document.getElementById('minigameIframe').src = 'minigames/context.html';
+      document.getElementById('mask').style.visibility = 'visible';
+
+      sessionStorage.setItem("activeEvent",command);
+      sessionStorage.setItem("activeStatus","begin");
+    } else {
+      document.getElementById('minigameIframe').style.visibility = 'hidden';
+      document.getElementById('minigameIframe').src = '';
+      document.getElementById('mask').style.visibility = 'hidden';
     }
   } else if (command == 'battle') {
-    if (
-      document.getElementById('minigameIframe').style.visibility == 'hidden'
-    ) {
+    if (document.getElementById('minigameIframe').style.visibility == 'hidden') {
       document.getElementById('minigameIframe').style.visibility = 'visible';
-      document.getElementById('minigameIframe').src = 'minigames/battle.html';
+      document.getElementById('minigameIframe').src = 'minigames/context.html';
+      document.getElementById('mask').style.visibility = 'visible';
+
+      sessionStorage.setItem("activeEvent",command);
+      sessionStorage.setItem("activeStatus","begin");
     } else {
       document.getElementById('minigameIframe').style.visibility = 'hidden';
       document.getElementById('minigameIframe').src = '';
+      document.getElementById('mask').style.visibility = 'hidden';
     }
   }
   var cmdDown = false;

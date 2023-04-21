@@ -121,7 +121,7 @@
         }
         function forcetravelTo(planet) {
             // Test: Is Neighbor Planet?
-            console.log("Force traveling to "+ planet);
+            //console.log("Force traveling to "+ planet);
             // Set New Planet
             document.getElementById(planet).children[0].style.outline="rgba(0, 128, 0, 0.85) thick solid";
             sessionStorage.setItem("currentPlanet", planet);
@@ -156,7 +156,7 @@
             var faction2Planets = ["KG-348", "Irulan", "Acheron", "Cerulan", "Thedus", "Cigni", "Neo Eden", "LV-223", "Providence", "Caladan", "LV-178"];
             var faction3Planets = ["Betelgeuse", "Alnitak", "Alnilam", "Mintaka", "Omni Prime", "Meissa", "Theta-1E", "Hatsya", "Rigel", "Theta-1B", "Fury-161"];
             var faction4Planets = ["Forge", "New Hope", "Ionus", "Liberty", "Haven", "XT-5", "Sky Ark", "Drybone", "XT-0", "Theta-1C", "Eos", "XT-3"];
-            console.log(faction1Planets);
+            //console.log(faction1Planets);
             sessionStorage.setItem("allFactionsPlanets",[faction1Planets,faction2Planets,faction3Planets,faction4Planets]);
             var allFactionsPlanets = sessionStorage.getItem("allFactionsPlanets");
 
@@ -193,7 +193,7 @@
 
             // Faction Events - Last event may be cut depending on player start
             //var exampleEvents=["battle", "battle", "asteroid"] //3 events
-            var faction1Events=["battle", "", "", "", "", "", "", "", "", "", "", ""] //12 events
+            var faction1Events=["asteroid", "", "", "", "", "", "", "", "", "", "", ""] //12 events
             var faction2Events=["", "", "", "", "", "", "", "", "", "", ""] //11 events
             var faction3Events=["", "", "", "", "", "", "", "", "", "", ""] //11 events
             var faction4Events=["", "", "", "", "", "", "", "", "", "", "", ""] //12 events
@@ -219,7 +219,9 @@
                 faction4Events.splice(faction4Events.length-1,1);
                 faction4Events.unshift(temp)
             }
-            console.log(faction1Events, faction2Events, faction3Events, faction4Events);
+            // Events and Planets Log
+            //console.log(faction1Planets, faction2Planets, faction3Planets, faction4Planets);
+            //console.log(faction1Events, faction2Events, faction3Events, faction4Events);
             
             sessionStorage.setItem("faction1Planets",JSON.stringify(faction1Planets));
             sessionStorage.setItem("faction2Planets",JSON.stringify(faction2Planets));
@@ -241,13 +243,13 @@
             var faction3Events = JSON.parse(sessionStorage.getItem("faction3Events"));
             var faction4Events = JSON.parse(sessionStorage.getItem("faction4Events"));
             
-            console.log(faction1Planets)
-            
+            var event;
+
             for (i=1; i<4; i++){
                 var index = eval("faction" + i + "Planets.indexOf(\""+planet+"\");");
                 //console.log(faction1Planets.indexOf("Aslan"))
                 if (index==-1){
-                    console.log("Planet not found in array")
+                    //console.log("Planet not found in array")
                 } else {
                     event = eval("faction" + i + "Events[" + index + "]");
                     console.log("Planet: " + planet + "|" + "Faction: " + i + 
@@ -258,10 +260,10 @@
                             debug("battle");
                             sessionStorage.setItem("activeEvent", "battle");
                             break;
-                        case "asteroids":
+                        case "asteroid":
                             console.log("Asteroids detected!");
                             debug("asteroid");
-                            sessionStorage.setItem("activeEvent", "battle");
+                            sessionStorage.setItem("activeEvent", "asteroid");
                             break;
                         default:
                             break;

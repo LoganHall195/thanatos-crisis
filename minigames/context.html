@@ -1,0 +1,154 @@
+<html>
+    <head>
+        <style>
+            * {
+                box-sizing: border-box;
+            }
+
+            html {
+                width: 100%;
+            }
+
+            body {
+                width: 100%;
+            }
+
+            #battle, #asteroid{
+                display: none;
+                color: white;
+            }
+
+            .event > div{
+                width: 400px;
+                height: flex;
+                top: 50%;
+                left: 50%;
+                -ms-transform: translate(-50%, -50%);
+                transform: translate(-50%, -50%);
+                position: absolute;
+                font-size: 24px;
+            }
+
+            .event > div > img{
+                display: block;
+                margin-left: auto;
+                margin-right: auto;
+                width: 75%;
+            }
+
+            .event > div > p > span{
+                color: lightgreen;
+            }
+
+            .eventTitle{
+                font-size: 30px;
+                opacity: 0;
+            }
+
+            .eventTitle:hover{
+                font-size: 30px;
+                opacity: 1;
+            }
+        </style>
+        
+        <!-- Scripts -->
+        <script src="../js/jquery.min.js"></script>
+    </head>
+    <body>
+        <!--div id="event">
+            <div class="begin">
+
+            </div>
+            <div class="end">
+                <button onclick="closeEvent(null)">close</button>
+            </div>
+        </div-->
+        <div id="battle" class="event">
+            <p class="eventTitle">Battle</p>
+            <div id="battlebegin" class="begin">
+                
+            </div>
+            <div id="battleend" class="end">
+                <button onclick="closeEvent('Scrap, rand')">Close</button>
+            </div>
+        </div>
+        <div id="asteroid" class="event"> <!-- Swap end and beginning once inv works -->
+            <p class="eventTitle">$activeEvent - $activeStatus</p>
+            <div id="asteroidend">
+                <image src="$eventBeginImage"></image>
+                <p> 
+                    $currentPlanet is preparing to be impacted by an asteroid storm & 
+                    the governor is requesting your assistance!<br>
+                    You will be tasked with shooting down a number of asteroids in the midst of the meteor shower.
+                </p>
+                <button onclick="openEvent()">Help</button>
+                <button onclick="ignoreEvent()">Leave</button>
+                <br>
+            </div>
+            <div id="asteroidbegin">
+                <image src="$eventEndImage"></image>
+                <p>
+                    The governor of $currentPlanet thanks you! His people reward your
+                    bravery by presenting you with <span>1x Alien Relic</span> and 
+                    <span>3x Valuable Ores</span>.
+                </p>
+                <button onclick="closeEvent('Alien Relic,1,Valuable Ores,3')">Close</button>
+            </div>
+        </div>
+
+    </body>
+    <script>
+        $(window).on('load',function(){ 
+            getContext();
+            document.body.innerHTML = document.body.innerHTML.replaceAll('$currentPlanet', sessionStorage.getItem("currentPlanet"));
+            document.body.innerHTML = document.body.innerHTML.replaceAll('$activeEvent', sessionStorage.getItem("activeEvent"));
+            document.body.innerHTML = document.body.innerHTML.replaceAll('$activeStatus', sessionStorage.getItem("activeStatus"));
+            document.body.innerHTML = document.body.innerHTML.replaceAll('$eventBeginImage', "../images/custom/minigames/"+sessionStorage.getItem("activeEvent")+".png");
+            document.body.innerHTML = document.body.innerHTML.replaceAll('$eventEndImage', "../images/custom/minigames/"+sessionStorage.getItem("activeEvent")+"End.png");
+        });
+    </script>
+    <script>
+        var event = sessionStorage.getItem("activeEvent");
+        var status = sessionStorage.getItem("activeStatus");
+
+        function getContext(){
+            document.getElementById(event).style.display="block";
+            if (event=="battle"){
+                if (status=="begin"){
+                    document.getElementById(event+"end").style.display="none";
+                } else if (status=="end"){
+                    document.getElementById(event+"begin").style.display="none";
+                } else {
+                    document.getElementById(event+"end").style.display="none";
+                    document.getElementById(event+"begin").style.display="none";
+                    console.log("Event status not found");
+                }
+            } else if (event=="asteroid"){
+                if (status=="begin"){
+                    document.getElementById(event+"end").style.display="none";
+                } else if (status=="end"){
+                    document.getElementById(event+"begin").style.display="none";
+                } else {
+                    document.getElementById(event+"end").style.display="none";
+                    document.getElementById(event+"begin").style.display="none";
+                    console.log("Event status not found");
+                }
+            }
+        }
+
+        function openEvent(){
+            window.parent.document.getElementById('minigameIframe').src = "minigames/"+event+".html";
+        }
+
+        function ignoreEvent(){
+            parent.debug("initialize");
+        }
+
+        function closeEvent(reward){
+            parent.calcRewards(reward);
+            sessionStorage.setItem("activeEvent","");
+            sessionStorage.setItem("activeStatus","");
+            parent.debug(event);
+        }
+    </script>
+</html>

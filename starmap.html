@@ -25,6 +25,8 @@
             <source src="images/star_map.mp4" type="video/mp4">
         </video>
         <!-- Body -->
+        <div id="mask"></div>
+
         <div id="main">
 
             <div id="highways">
@@ -509,11 +511,14 @@
                 },5); //change back to 3500 before release
 
                 
-                openInventory(); // Remove after editing inventory items
+                //openInventory(); // Remove after editing inventory items
                 worldSeed(sessionStorage.getItem("seed"));
-                debug("battle"); // Needed to initialize the debug menu
+                //document.getElementById('mask').style.visibility = 'hidden';
+                debug("initialize"); // Needed to initialize the debug menu
+                
             });
             window.onresize = function(){window.location.reload();}
         </script>
+        
     </body>
 </html>
