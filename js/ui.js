@@ -144,15 +144,21 @@ function calcRewards(reward){
   if(reward!=null){
     const rewards = reward.split(',');
     console.log(rewards);
-    for (i=0; i<rewards.length/2; i+=2){
+    for (i=0; i<rewards.length; i+=2){
         //console.log("addItem("+rewards[i].toString()+", "+parseInt(rewards[i+1])+");")
-        addItem(rewards[i], rewards[i+1]);
+        var rewardQuantity = rewards[i+1];
+        console.log(rewardQuantity)
+        if(rewardQuantity.toString()=="rand" || rewardQuantity.toString()==" rand"){
+          rewardQuantity=Math.floor(Math.random() * (5 - 2 + 1) + 2); // rand(2,5)
+        }
+        addItem(rewards[i], rewardQuantity);
     }
     populateGrid(inventory, itemList);
   }
 }
 
- addItem('Scrap', 5);
+ //addItem('Scrap', 0);
+ //addItem('Alien Relic', 1);
 // removeItem('Scrap', 5);
 // addItem('Alien Relic', 5);
 // addItem('Scrap', 1);

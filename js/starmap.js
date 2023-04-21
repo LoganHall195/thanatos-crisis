@@ -193,7 +193,7 @@
 
             // Faction Events - Last event may be cut depending on player start
             //var exampleEvents=["battle", "battle", "asteroid"] //3 events
-            var faction1Events=["asteroid", "", "", "", "", "", "", "", "", "", "", ""] //12 events
+            var faction1Events=["battle", "", "", "", "", "", "", "", "", "asteroid", "", ""] //12 events
             var faction2Events=["", "", "", "", "", "", "", "", "", "", ""] //11 events
             var faction3Events=["", "", "", "", "", "", "", "", "", "", ""] //11 events
             var faction4Events=["", "", "", "", "", "", "", "", "", "", "", ""] //12 events

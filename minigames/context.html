@@ -64,20 +64,33 @@
             </div>
         </div-->
         <div id="battle" class="event">
-            <p class="eventTitle">Battle</p>
-            <div id="battlebegin" class="begin">
-                
+            <p class="eventTitle">$activeEvent - $activeStatus</p>
+            <div id="battleend" class="begin">
+                <image src="$eventBeginImage"></image>
+                <p> 
+                    You arrived at $currentPlanet to find a pirate ship shaking down a small civilian ship. 
+                    He swiftly pivots to you, notices your weapon, and moves to engage <br>
+                    You have no chance to run.
+                </p>
+                <button onclick="openEvent()">Engage</button>
+                <br>
             </div>
-            <div id="battleend" class="end">
+            <div id="battlebegin" class="end">
+                <image src="$eventEndImage"></image>
+                <p>
+                    You defeated the pirate! The civilian ship seems to have escaped
+                    while you were fighting the pirate. You can still salvage the
+                    Pirate ship for some <span>Scrap</span>.
+                </p>
                 <button onclick="closeEvent('Scrap, rand')">Close</button>
             </div>
         </div>
-        <div id="asteroid" class="event"> <!-- Swap end and beginning once inv works -->
+        <div id="asteroid" class="event">
             <p class="eventTitle">$activeEvent - $activeStatus</p>
-            <div id="asteroidend">
+            <div id="asteroidend"> 
                 <image src="$eventBeginImage"></image>
                 <p> 
-                    $currentPlanet is preparing to be impacted by an asteroid storm & 
+                    $currentPlanet is preparing to be impacted by a large number of asteroids & 
                     the governor is requesting your assistance!<br>
                     You will be tasked with shooting down a number of asteroids in the midst of the meteor shower.
                 </p>

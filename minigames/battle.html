@@ -377,6 +377,11 @@
           healButton.disabled = true;
           roundResults(res);
           compExplosion.style.visibility = 'visible';
+          // Wait 3 seconds and return to context menu
+          setTimeout(function() {
+            sessionStorage.setItem("activeStatus","end");
+            window.parent.document.getElementById('minigameIframe').src = "minigames/context.html";
+          }, 3000);
         }
       }
 
