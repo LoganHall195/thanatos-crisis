@@ -110,18 +110,18 @@ let inventory = [];
 
 // Add Item/Adjust Item Quantity
 function addItem(name, quantity) {
-  console.log("Adding " + quantity + "x "+name+".")
+  console.log('Adding ' + quantity + 'x ' + name + '.');
   // Find the item in the array with the matching name
   let foundItem = inventory.find((item) => item.name === name);
   if (foundItem) {
     // If the item is found, update the quantity
     //console.log("Item found in player inventory")
     foundItem.quantity += quantity;
-    console.log("Player has "+foundItem.quantity+" of "+foundItem.name);
+    console.log('Player has ' + foundItem.quantity + ' of ' + foundItem.name);
   } else {
     // If the item is not found, add a new object with the name and quantity
     inventory.push({ name: name, quantity: quantity });
-    console.log(inventory)
+    console.log(inventory);
   }
 }
 
@@ -140,25 +140,36 @@ function removeItem(name, quantity) {
   }
 }
 
-function calcRewards(reward){
-  if(reward!=null){
+// Add Currency
+
+// function addCurr(quantity) {
+//   console.log(currency.textContent);
+
+// }
+// addCurr(12);
+
+function calcRewards(reward) {
+  if (reward != null) {
     const rewards = reward.split(',');
     console.log(rewards);
-    for (i=0; i<rewards.length; i+=2){
-        //console.log("addItem("+rewards[i].toString()+", "+parseInt(rewards[i+1])+");")
-        var rewardQuantity = rewards[i+1];
-        console.log(rewardQuantity)
-        if(rewardQuantity.toString()=="rand" || rewardQuantity.toString()==" rand"){
-          rewardQuantity=Math.floor(Math.random() * (5 - 2 + 1) + 2); // rand(2,5)
-        }
-        addItem(rewards[i], rewardQuantity);
+    for (i = 0; i < rewards.length; i += 2) {
+      //console.log("addItem("+rewards[i].toString()+", "+parseInt(rewards[i+1])+");")
+      var rewardQuantity = rewards[i + 1];
+      console.log(rewardQuantity);
+      if (
+        rewardQuantity.toString() == 'rand' ||
+        rewardQuantity.toString() == ' rand'
+      ) {
+        rewardQuantity = Math.floor(Math.random() * (5 - 2 + 1) + 2); // rand(2,5)
+      }
+      addItem(rewards[i], rewardQuantity);
     }
     populateGrid(inventory, itemList);
   }
 }
 
- //addItem('Scrap', 0);
- //addItem('Alien Relic', 1);
+//addItem('Scrap', 0);
+//addItem('Alien Relic', 1);
 // removeItem('Scrap', 5);
 // addItem('Alien Relic', 5);
 // addItem('Scrap', 1);
@@ -166,11 +177,10 @@ function calcRewards(reward){
 //addItem('High Tech Shield System', 10);
 //console.log(inventory)
 
-
 // Populate Grid
 function populateGrid(items, list) {
   //Reset gridContainer before repopulating
-  document.getElementById("gridContainer").innerHTML=gridContent;
+  document.getElementById('gridContainer').innerHTML = gridContent;
   const gridItems = document.querySelectorAll('.grid-item'); // Define gridItems
   for (let i = 0; i < items.length; i++) {
     //console.log('items Length: ' + items.length);
@@ -196,14 +206,16 @@ function populateGrid(items, list) {
 }
 
 window.onload = function () {
-  gridContent = document.getElementById("gridContainer").innerHTML;
+  gridContent = document.getElementById('gridContainer').innerHTML;
   populateGrid(inventory, itemList);
 };
 
 function debug(command) {
   //console.log(command)
   if (command == 'initialize') {
-    if (document.getElementById('minigameIframe').style.visibility == 'hidden') {
+    if (
+      document.getElementById('minigameIframe').style.visibility == 'hidden'
+    ) {
       document.getElementById('minigameIframe').style.visibility = 'visible';
       document.getElementById('mask').style.visibility = 'visible';
     } else {
@@ -212,31 +224,51 @@ function debug(command) {
       document.getElementById('mask').style.visibility = 'hidden';
     }
   } else if (command == 'asteroid') {
-    if (document.getElementById('minigameIframe').style.visibility == 'hidden') {
+    if (
+      document.getElementById('minigameIframe').style.visibility == 'hidden'
+    ) {
       document.getElementById('minigameIframe').style.visibility = 'visible';
       document.getElementById('minigameIframe').src = 'minigames/context.html';
       document.getElementById('mask').style.visibility = 'visible';
 
-      sessionStorage.setItem("activeEvent",command);
-      sessionStorage.setItem("activeStatus","begin");
+      sessionStorage.setItem('activeEvent', command);
+      sessionStorage.setItem('activeStatus', 'begin');
     } else {
       document.getElementById('minigameIframe').style.visibility = 'hidden';
       document.getElementById('minigameIframe').src = '';
       document.getElementById('mask').style.visibility = 'hidden';
     }
   } else if (command == 'battle') {
-    if (document.getElementById('minigameIframe').style.visibility == 'hidden') {
+    if (
+      document.getElementById('minigameIframe').style.visibility == 'hidden'
+    ) {
       document.getElementById('minigameIframe').style.visibility = 'visible';
       document.getElementById('minigameIframe').src = 'minigames/context.html';
       document.getElementById('mask').style.visibility = 'visible';
 
-      sessionStorage.setItem("activeEvent",command);
-      sessionStorage.setItem("activeStatus","begin");
+      sessionStorage.setItem('activeEvent', command);
+      sessionStorage.setItem('activeStatus', 'begin');
     } else {
       document.getElementById('minigameIframe').style.visibility = 'hidden';
       document.getElementById('minigameIframe').src = '';
       document.getElementById('mask').style.visibility = 'hidden';
     }
+  } else if (command == 'add money 1') {
+    addMoney(1);
+  } else if (command == 'add money 10') {
+    addMoney(10);
+  } else if (command == 'add money 100') {
+    addMoney(100);
+  } else if (command == 'add money 1000') {
+    addMoney(1000);
+  } else if (command == 'sub money 1') {
+    subMoney(1);
+  } else if (command == 'sub money 10') {
+    subMoney(10);
+  } else if (command == 'sub money 100') {
+    subMoney(100);
+  } else if (command == 'sub money 1000') {
+    subMoney(1000);
   }
   var cmdDown = false;
 

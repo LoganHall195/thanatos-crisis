@@ -433,7 +433,15 @@
                 <h3>Debug Menu</h3>
                 
                 <button onclick="debug('asteroid')">-> asteroid</button> <br>
-                <button onclick="debug('battle')">-> battle</button>
+                <button onclick="debug('battle')">-> battle</button> <br> <br>
+                <button onclick="debug('add money 1')">-> add money 1</button> <br>
+                <button onclick="debug('add money 10')">-> add money 10</button> <br>
+                <button onclick="debug('add money 100')">-> add money 100</button> <br>
+                <button onclick="debug('add money 1000')">-> add money 1000</button> <br> <br>
+                <button onclick="debug('sub money 1')">-> sub money 1</button> <br>
+                <button onclick="debug('sub money 10')">-> sub money 10</button> <br>
+                <button onclick="debug('sub money 100')">-> sub money 100</button> <br>
+                <button onclick="debug('sub money 1000')">-> sub money 1000</button>
 
             </div>
 
@@ -481,7 +489,7 @@
                         <div id="currency" style="display:inline; ">
                             <image src="images/custom/T_Currency.png" style="width: 40px;">
                                 <p id="currencyText">
-                                    1,000,000
+                                    
                                 </p>
                             </image>
                         </div>
@@ -489,7 +497,7 @@
                         <div id="fuel" style="display:inline;">
                             <image src="images/custom/fuel.png" style="width: 34px;">
                                 <p id="fuelText">
-                                    100
+                                    
                                 </p>
                             </image>
                         </div>
@@ -504,6 +512,53 @@
         </div>
 
         <!-- Scripts -->
+        
+        <script> // Initialize money
+        var money = 0;
+        function initMoney() {
+            money = 0;
+            document.getElementById('currencyText').innerHTML = money;
+        }
+        </script>
+
+        <script> // Add money
+            function addMoney(quantity) {
+                if (money == null) {
+                    initMoney();
+                }
+                //console.log('Current Money: ' + money + ' Quantity: ' + quantity);
+                money = money + quantity;
+                if (money > 1000000) {
+                    money = 1000000
+                }
+                //console.log('Money after addition: ' + money);
+                document.getElementById('currencyText').innerHTML = money;
+                //console.log('Current Money: ' + money); 
+            }
+        </script>
+
+        <script> // Sub money
+            function subMoney(quantity) {
+                //console.log('Current Money: ' + money + ' Quantity: ' + quantity);
+                money = money - quantity;
+                if (money <= 0) {
+                    money = 0;
+                }
+                //console.log('Money after subtraction: ' + money);
+                document.getElementById('currencyText').innerHTML = money;
+                //console.log('Current Money: ' + money); 
+            }
+        </script>
+
+        <script> // Initialize fuel
+            function initFuel() {
+                let fuel = 0;
+                console.log(document.getElementById('fuelText').textContent);
+                document.getElementById('fuelText').innerHTML = fuel;
+                console.log(document.getElementById('fuelText').textContent);
+            }
+        </script>
+        
         <script> // Loader Script
             $(window).on('load',function(){
                 setTimeout(function(){
