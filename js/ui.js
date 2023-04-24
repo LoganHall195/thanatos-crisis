@@ -120,6 +120,7 @@ function initInv() {
 }
 // Add Item/Adjust Item Quantity
 function addItem(name, quantity) {
+  quantity = parseInt(quantity);
   console.log('Adding ' + quantity + 'x ' + name + '.');
   // Find the item in the array with the matching name
   let foundItem = inventory.find((item) => item.name === name);
@@ -170,6 +171,7 @@ function calcRewards(reward) {
         rewardQuantity = Math.floor(Math.random() * (5 - 2 + 1) + 2); // rand(2,5)
       }
       addItem(rewards[i], rewardQuantity);
+      console.log(inventoryString);
     }
     populateGrid(inventory, itemList);
   }
