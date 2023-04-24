@@ -108,10 +108,16 @@ let itemList = [
 // Player Inventory
 let inventory = [];
 
+// Play Invertory as a string for session storage
 let inventoryString = '';
 
-// Play Invertory as a string for session storage
-
+function initInv() {
+  var seshInv = sessionStorage.getItem('inventory', inventory);
+  console.log('seshInv' + seshInv);
+  if (seshInv == null) {
+    sessionStorage.setItem('inventory', inventory);
+  }
+}
 // Add Item/Adjust Item Quantity
 function addItem(name, quantity) {
   console.log('Adding ' + quantity + 'x ' + name + '.');
@@ -181,34 +187,47 @@ function calcRewards(reward) {
 // Populate Grid
 function populateGrid(items, list) {
   //Reset gridContainer before repopulating
-  console.log('items Length: ' + items.length);
-  invString = sessionStorage.getItem('inventory');
-  inventory = JSON.parse(invString);
-  //console.log(inventory[0]);
-  document.getElementById('gridContainer').innerHTML = gridContent;
-  const gridItems = document.querySelectorAll('.grid-item'); // Define gridItems
-  for (let i = 0; i < items.length; i++) {
-    console.log(items[i].name);
+  //console.log('items Length: ' + items.length);
+  // if (inventory.length == 0) {
+  //   sessionStorage.setItem('inventory', inventory);
+  // }
+  // if (inventoryString == '') {
+  //   sessionStorage.setItem('inventory', inventory);
+  // }
+  //else {
+  console.log(inventory);
+  var invString = sessionStorage.getItem('inventory');
+  console.log('invStr: ' + invString);
+  if (invString != '') {
+    inventory = JSON.parse(invString);
+    //console.log(inventory[0]);
+    document.getElementById('gridContainer').innerHTML = gridContent;
+    const gridItems = document.querySelectorAll('.grid-item'); // Define gridItems
+    for (let i = 0; i < items.length; i++) {
+      console.log(items[i].name);
 
-    const item = items[i];
-    console.log(list[i].image);
-    const gridItem = gridItems[i];
+      const item = items[i];
+      console.log(list[i].image);
+      const gridItem = gridItems[i];
 
-    const image = document.createElement('img');
-    image.src = './images/custom/items/' + item.name + '.png';
-    image.alt = item.name;
-    image.style = 'width: 65px; margin-left: -30px; margin-top: -33px';
-    gridItem.appendChild(image);
+      const image = document.createElement('img');
+      image.src = './images/custom/items/' + item.name + '.png';
+      image.alt = item.name;
+      image.style = 'width: 65px; margin-left: -30px; margin-top: -33px';
+      gridItem.appendChild(image);
 
-    const quantity = document.createElement('p');
-    quantity.classList.add('quantity');
-    quantity.textContent = `${item.quantity}`;
-    gridItem.appendChild(quantity);
-    quantity.style = 'margin-left: 24; margin-top: -15; color: black;';
+      const quantity = document.createElement('p');
+      quantity.classList.add('quantity');
+      quantity.textContent = `${item.quantity}`;
+      gridItem.appendChild(quantity);
+      quantity.style = 'margin-left: 24; margin-top: -15; color: black;';
+    }
+    for (let i = 0; i < itemList.length; i++) {
+      //console.log(itemList[i]);
+    }
   }
-  for (let i = 0; i < itemList.length; i++) {
-    //console.log(itemList[i]);
-  }
+
+  //}
 }
 
 window.onload = function () {
@@ -362,7 +381,7 @@ function subMoney(quantity) {
 }
 
 // Player fuel
-var fuel = 0;
+var fuel = 10;
 
 // Initialize fuel
 function initFuel() {
@@ -389,7 +408,7 @@ function addFuel(quantity) {
   sessionStorage.setItem('fuel', fuel);
 }
 
-// Sub money
+// Sub fuel
 function subFuel(quantity) {
   //console.log('Current Money: ' + money + ' Quantity: ' + quantity);
   if (fuel < quantity) {
