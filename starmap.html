@@ -434,14 +434,18 @@
                 
                 <button onclick="debug('asteroid')">-> asteroid</button> <br>
                 <button onclick="debug('battle')">-> battle</button> <br> <br>
-                <button onclick="debug('add money 1')">-> add money 1</button> <br>
-                <button onclick="debug('add money 10')">-> add money 10</button> <br>
-                <button onclick="debug('add money 100')">-> add money 100</button> <br>
-                <button onclick="debug('add money 1000')">-> add money 1000</button> <br> <br>
+                <button onclick="debug('add money 1')">-> add money 1</button>
                 <button onclick="debug('sub money 1')">-> sub money 1</button> <br>
+                <button onclick="debug('add money 10')">-> add money 10</button>
                 <button onclick="debug('sub money 10')">-> sub money 10</button> <br>
+                <button onclick="debug('add money 100')">-> add money 100</button>
                 <button onclick="debug('sub money 100')">-> sub money 100</button> <br>
-                <button onclick="debug('sub money 1000')">-> sub money 1000</button>
+                <button onclick="debug('add money 1000')">-> add money 1000</button> 
+                <button onclick="debug('sub money 1000')">-> sub money 1000</button> <br> <br>
+                <button onclick="debug('add scrap')">-> add scrap</button>
+                <button onclick="debug('sub scrap')">-> sub scrap</button> <br> 
+                <button onclick="debug('add substance')">-> add substance</button>
+                <button onclick="debug('sub substance')">-> sub substance</button>
 
             </div>
 
@@ -451,7 +455,7 @@
             </div>
 
             <div id="inventory_system">
-                <div id = "inventoryButton" onclick = "openInventory()">
+                <div id = "inventoryButton" onclick = "populateGrid(inventory, itemList), openInventory()">
                     <image src = "images/custom/crate nobg.png" style = "width: 100%;">
                         <p style="color: aliceblue; text-align: center; font-size: 20;">
                             Inventory
@@ -521,33 +525,10 @@
         }
         </script>
 
-        <script> // Add money
-            function addMoney(quantity) {
-                if (money == null) {
-                    initMoney();
-                }
-                //console.log('Current Money: ' + money + ' Quantity: ' + quantity);
-                money = money + quantity;
-                if (money > 1000000) {
-                    money = 1000000
-                }
-                //console.log('Money after addition: ' + money);
-                document.getElementById('currencyText').innerHTML = money;
-                //console.log('Current Money: ' + money); 
-            }
+        <script> 
         </script>
 
-        <script> // Sub money
-            function subMoney(quantity) {
-                //console.log('Current Money: ' + money + ' Quantity: ' + quantity);
-                money = money - quantity;
-                if (money <= 0) {
-                    money = 0;
-                }
-                //console.log('Money after subtraction: ' + money);
-                document.getElementById('currencyText').innerHTML = money;
-                //console.log('Current Money: ' + money); 
-            }
+        <script> 
         </script>
 
         <script> // Initialize fuel
@@ -575,5 +556,5 @@
             window.onresize = function(){window.location.reload();}
         </script>
         
-    </body>
+b    </body>
 </html>

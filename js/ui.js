@@ -108,6 +108,10 @@ let itemList = [
 // Player Inventory
 let inventory = [];
 
+let inventoryString = '';
+
+// Play Invertory as a string for session storage
+
 // Add Item/Adjust Item Quantity
 function addItem(name, quantity) {
   console.log('Adding ' + quantity + 'x ' + name + '.');
@@ -123,30 +127,27 @@ function addItem(name, quantity) {
     inventory.push({ name: name, quantity: quantity });
     console.log(inventory);
   }
+  inventoryString = JSON.stringify(inventory);
+  sessionStorage.setItem('inventory', inventoryString);
+  console.log('inventoryString: ' + inventoryString);
 }
 
 function removeItem(name, quantity) {
   // Find the item in the array with the matching name
   let foundItem = inventory.find((item) => item.name === name);
-  if (foundItem.quantity >= quantity) {
+  if (foundItem.quantity > quantity) {
     // If the item is found, update the quantity
     foundItem.quantity -= quantity;
     if (foundItem.quantity == 0) {
-      // If the item is not found, add a new object with the name and quantity
+      // Remove item from list
       inventory = inventory.filter((item) => item.name !== foundItem.name);
     }
   } else {
     console.log('Not Enough ' + foundItem.name);
   }
+  inventoryString = JSON.stringify(inventory);
+  sessionStorage.setItem('inventory', inventoryString);
 }
-
-// Add Currency
-
-// function addCurr(quantity) {
-//   console.log(currency.textContent);
-
-// }
-// addCurr(12);
 
 function calcRewards(reward) {
   if (reward != null) {
@@ -168,7 +169,7 @@ function calcRewards(reward) {
   }
 }
 
-//addItem('Scrap', 0);
+//addItem('Scrap', 1);
 //addItem('Alien Relic', 1);
 // removeItem('Scrap', 5);
 // addItem('Alien Relic', 5);
@@ -180,10 +181,15 @@ function calcRewards(reward) {
 // Populate Grid
 function populateGrid(items, list) {
   //Reset gridContainer before repopulating
+  console.log('items Length: ' + items.length);
+  invString = sessionStorage.getItem('inventory');
+  inventory = JSON.parse(invString);
+  //console.log(inventory[0]);
   document.getElementById('gridContainer').innerHTML = gridContent;
   const gridItems = document.querySelectorAll('.grid-item'); // Define gridItems
   for (let i = 0; i < items.length; i++) {
-    //console.log('items Length: ' + items.length);
+    console.log(items[i].name);
+
     const item = items[i];
     console.log(list[i].image);
     const gridItem = gridItems[i];
@@ -269,7 +275,16 @@ function debug(command) {
     subMoney(100);
   } else if (command == 'sub money 1000') {
     subMoney(1000);
+  } else if (command == 'add scrap') {
+    addItem('Scrap', 1);
+  } else if (command == 'add substance') {
+    addItem('Strange Substance', 1);
+  } else if (command == 'sub scrap') {
+    removeItem('Scrap', 1);
+  } else if (command == 'sub substance') {
+    removeItem('Strange Substance', 1);
   }
+
   var cmdDown = false;
 
   document.body.addEventListener('keydown', function (event) {
@@ -287,4 +302,35 @@ function debug(command) {
       document.getElementById('debug').style.visibility = 'hidden';
     }
   });
+}
+
+// Add money
+function addMoney(quantity) {
+  if (money == null) {
+    initMoney();
+  }
+  //console.log('Current Money: ' + money + ' Quantity: ' + quantity);
+  money = money + quantity;
+  if (money > 1000000) {
+    money = 1000000;
+  }
+  //console.log('Money after addition: ' + money);
+  document.getElementById('currencyText').innerHTML = money;
+  //console.log('Current Money: ' + money);
+}
+
+// Sub money
+function subMoney(quantity) {
+  //console.log('Current Money: ' + money + ' Quantity: ' + quantity);
+  if (money < quantity) {
+    console.log('not enough funds');
+  } else {
+    money = money - quantity;
+    if (money <= 0) {
+      money = 0;
+    }
+    //console.log('Money after subtraction: ' + money);
+    document.getElementById('currencyText').innerHTML = money;
+    //console.log('Current Money: ' + money);
+  }
 }
