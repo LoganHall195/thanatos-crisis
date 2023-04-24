@@ -442,6 +442,12 @@
                 <button onclick="debug('sub money 100')">-> sub money 100</button> <br>
                 <button onclick="debug('add money 1000')">-> add money 1000</button> 
                 <button onclick="debug('sub money 1000')">-> sub money 1000</button> <br> <br>
+                <button onclick="debug('add fuel 1')">-> add fuel 1</button>
+                <button onclick="debug('sub fuel 1')">-> sub fuel 1</button> <br>
+                <button onclick="debug('add fuel 10')">-> add fuel 10</button>
+                <button onclick="debug('sub fuel 10')">-> sub fuel 10</button> <br>
+                <button onclick="debug('add fuel 100')">-> add fuel 100</button>
+                <button onclick="debug('sub fuel 100')">-> sub fuel 100</button> <br> <br>
                 <button onclick="debug('add scrap')">-> add scrap</button>
                 <button onclick="debug('sub scrap')">-> sub scrap</button> <br> 
                 <button onclick="debug('add substance')">-> add substance</button>
@@ -515,38 +521,15 @@
             </div>
         </div>
 
-        <!-- Scripts -->
-        
-        <script> // Initialize money
-        var money = 0;
-        function initMoney() {
-            money = 0;
-            document.getElementById('currencyText').innerHTML = money;
-        }
-        </script>
-
-        <script> 
-        </script>
-
-        <script> 
-        </script>
-
-        <script> // Initialize fuel
-            function initFuel() {
-                let fuel = 0;
-                console.log(document.getElementById('fuelText').textContent);
-                document.getElementById('fuelText').innerHTML = fuel;
-                console.log(document.getElementById('fuelText').textContent);
-            }
-        </script>
-        
+        <!-- Scripts -->      
         <script> // Loader Script
             $(window).on('load',function(){
                 setTimeout(function(){
                 $('.page-loader').fadeOut('slow');
                 },5); //change back to 3500 before release
 
-                
+                initMoney();
+                initFuel();
                 //openInventory(); // Remove after editing inventory items
                 worldSeed(sessionStorage.getItem("seed"));
                 //document.getElementById('mask').style.visibility = 'hidden';

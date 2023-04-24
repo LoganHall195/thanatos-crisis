@@ -135,7 +135,7 @@ function addItem(name, quantity) {
 function removeItem(name, quantity) {
   // Find the item in the array with the matching name
   let foundItem = inventory.find((item) => item.name === name);
-  if (foundItem.quantity > quantity) {
+  if (foundItem.quantity >= quantity) {
     // If the item is found, update the quantity
     foundItem.quantity -= quantity;
     if (foundItem.quantity == 0) {
@@ -283,6 +283,18 @@ function debug(command) {
     removeItem('Scrap', 1);
   } else if (command == 'sub substance') {
     removeItem('Strange Substance', 1);
+  } else if (command == 'add fuel 1') {
+    addFuel(1);
+  } else if (command == 'add fuel 10') {
+    addFuel(10);
+  } else if (command == 'add fuel 100') {
+    addFuel(100);
+  } else if (command == 'sub fuel 1') {
+    subFuel(1);
+  } else if (command == 'sub fuel 10') {
+    subFuel(10);
+  } else if (command == 'sub fuel 100') {
+    subFuel(100);
   }
 
   var cmdDown = false;
@@ -304,11 +316,23 @@ function debug(command) {
   });
 }
 
+// Player money
+var money = 0;
+
+// Initialize money
+function initMoney() {
+  var seshMoney = sessionStorage.getItem('money', money);
+  if (seshMoney == null) {
+    sessionStorage.setItem('money', money);
+  } else {
+    var moneyStr = sessionStorage.getItem('money', money);
+    money = parseInt(moneyStr);
+  }
+  document.getElementById('currencyText').innerHTML = money;
+}
+
 // Add money
 function addMoney(quantity) {
-  if (money == null) {
-    initMoney();
-  }
   //console.log('Current Money: ' + money + ' Quantity: ' + quantity);
   money = money + quantity;
   if (money > 1000000) {
@@ -317,6 +341,7 @@ function addMoney(quantity) {
   //console.log('Money after addition: ' + money);
   document.getElementById('currencyText').innerHTML = money;
   //console.log('Current Money: ' + money);
+  sessionStorage.setItem('money', money);
 }
 
 // Sub money
@@ -332,5 +357,51 @@ function subMoney(quantity) {
     //console.log('Money after subtraction: ' + money);
     document.getElementById('currencyText').innerHTML = money;
     //console.log('Current Money: ' + money);
+    sessionStorage.setItem('money', money);
+  }
+}
+
+// Player fuel
+var fuel = 0;
+
+// Initialize fuel
+function initFuel() {
+  var seshFuel = sessionStorage.getItem('fuel', fuel);
+  if (seshFuel == null) {
+    sessionStorage.setItem('fuel', fuel);
+  } else {
+    var fuelStr = sessionStorage.getItem('fuel', fuel);
+    fuel = parseInt(fuelStr);
+  }
+  document.getElementById('fuelText').innerHTML = fuel;
+}
+
+// Add fuel
+function addFuel(quantity) {
+  //console.log('Current Money: ' + money + ' Quantity: ' + quantity);
+  fuel = fuel + quantity;
+  if (fuel > 100) {
+    fuel = 100;
+  }
+  //console.log('Money after addition: ' + money);
+  document.getElementById('fuelText').innerHTML = fuel;
+  //console.log('Current Money: ' + money);
+  sessionStorage.setItem('fuel', fuel);
+}
+
+// Sub money
+function subFuel(quantity) {
+  //console.log('Current Money: ' + money + ' Quantity: ' + quantity);
+  if (fuel < quantity) {
+    console.log('not enough fuel');
+  } else {
+    fuel = fuel - quantity;
+    if (fuel <= 0) {
+      fuel = 0;
+    }
+    //console.log('Money after subtraction: ' + money);
+    document.getElementById('fuelText').innerHTML = fuel;
+    //console.log('Current Money: ' + money);
+    sessionStorage.setItem('fuel', fuel);
   }
 }
