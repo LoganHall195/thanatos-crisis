@@ -159,9 +159,39 @@
 
         function closeEvent(reward){
             parent.calcRewards(reward);
+            if (event=="battle"||event=="asteroid"){
+                removeEvent()
+            }
             sessionStorage.setItem("activeEvent","");
             sessionStorage.setItem("activeStatus","");
             parent.debug(event);
+        }
+
+        function removeEvent(){
+            var planet = sessionStorage.getItem("currentPlanet");
+            var faction1Planets = JSON.parse(sessionStorage.getItem("faction1Planets"));
+            var faction2Planets = JSON.parse(sessionStorage.getItem("faction2Planets"));
+            var faction3Planets = JSON.parse(sessionStorage.getItem("faction3Planets"));
+            var faction4Planets = JSON.parse(sessionStorage.getItem("faction4Planets"));
+            var faction1Events = JSON.parse(sessionStorage.getItem("faction1Events"));
+            var faction2Events = JSON.parse(sessionStorage.getItem("faction2Events"));
+            var faction3Events = JSON.parse(sessionStorage.getItem("faction3Events"));
+            var faction4Events = JSON.parse(sessionStorage.getItem("faction4Events"));
+            
+            var event;
+
+            for (i=1; i<4; i++){
+                var index = eval("faction" + i + "Planets.indexOf(\""+planet+"\");");
+                //console.log(faction1Planets.indexOf("Aslan"))
+                if (index==-1){
+                    //console.log("Planet not found in array")
+                } else {
+                    //console.log("removing: "+"faction" + i + "Events[" + index + "]")
+                    var array = eval("faction" + i + "Events");
+                    array[index]="";
+                    sessionStorage.setItem("faction" + i + "Events",JSON.stringify(array));
+                }
+            }
         }
     </script>
 </html>

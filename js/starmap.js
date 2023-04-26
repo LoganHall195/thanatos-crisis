@@ -171,7 +171,9 @@
             var lastPos = sessionStorage.getItem("currentPlanet");
             
             // For testing
-            difficulty = '1'; sessionStorage.setItem("difficulty", difficulty);
+            if (difficulty==null){
+                difficulty = '1'; sessionStorage.setItem("difficulty", difficulty);
+            }
             //lastPos = null; //sessionStorage.setItem("currentPlanet", lastPos);
 
             // Populate Events
@@ -216,10 +218,10 @@
 
             // Faction Events - Last event may be cut depending on player start
             //var exampleEvents=["battle", "battle", "asteroid"] //3 events
-            var faction1Events=["battle", "", "", "", "", "", "", "", "", "asteroid", "", ""] //12 events
-            var faction2Events=["", "", "", "", "", "", "", "", "", "", ""] //11 events
-            var faction3Events=["", "", "", "", "", "", "", "", "", "", ""] //11 events
-            var faction4Events=["", "", "", "", "", "", "", "", "", "", "", ""] //12 events
+            var faction1Events=["battle", "asteroid", "battle", "asteroid", "battle", "asteroid", "battle", "asteroid", "battle", "asteroid", "battle", "asteroid"] //12 events
+            var faction2Events=["asteroid", "battle", "asteroid", "battle", "asteroid", "battle", "asteroid", "battle", "asteroid", "battle", "asteroid"] //11 events
+            var faction3Events=["asteroid", "battle", "asteroid", "battle", "asteroid", "battle", "asteroid", "battle", "asteroid", "battle", "asteroid"] //11 events
+            var faction4Events=["battle", "asteroid", "battle", "asteroid", "battle", "asteroid", "battle", "asteroid", "battle", "asteroid", "battle", "asteroid"] //12 events
 
             // Apply Seed Randomizer
             for (i=0; i<sessionStorage.getItem("seed"); i++){ // Faction 1
