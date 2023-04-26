@@ -103,7 +103,9 @@
             if (planet==sessionStorage.getItem("currentPlanet")){
                 // Probably put interaction here
                 console.log("You are already there"); 
-            } else if (hasMatchingLocations){
+            } else if (hasMatchingLocations && sessionStorage.getItem("fuel")>0){
+                sessionStorage.setItem("fuel",sessionStorage.getItem("fuel")-1);
+                document.getElementById("fuelText").textContent=sessionStorage.getItem("fuel");
                 console.log("Traveling to "+ planet +"!");
                 // Clear Last Planet
                 let lastPlanet = sessionStorage.getItem("currentPlanet");
@@ -115,6 +117,27 @@
                 showLines();
                 // Check for events
                 checkEvent(planet);
+            } else if (sessionStorage.getItem("fuel")==0){
+                alert("You are out of fuel! You have no choice but to send out distress signals.")
+                setTimeout(function(){
+                    var randInt = Math.floor(Math.random() * 3)+1;
+                    randInt = 2;
+                    if (randInt == 1){
+                        console.log("Out of fuel! Pirate arrives!");
+                        // Battle
+
+                    } else if (randInt == 2){
+                        console.log("Out of fuel! Civilian arrives!");
+                        // Fuel donation
+                        alert("After some time, a civilian vessel arrives - it takes pity on you and offers 1 fuel.");
+                        sessionStorage.setItem("fuel",1);
+                        document.getElementById("fuelText").textContent=sessionStorage.getItem("fuel");
+                    } else if (randInt == 3){
+                        console.log("Out of fuel! Trader arrives!");
+                        // Trade
+
+                    }
+                 }, 1000); 
             } else {
                 console.log("Cannot travel to non-neighboring planets");
             }
