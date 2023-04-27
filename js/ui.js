@@ -350,6 +350,28 @@ function debug(command) {
     subFuel(10);
   } else if (command == 'sub fuel 100') {
     subFuel(100);
+  } else if (command == 'add everything') {
+    addItem('Scrap', 1);
+    addItem('Alien Relic', 1);
+    addItem('Valuable Ores', 1);
+    addItem('High Tech Weapon System', 1);
+    addItem('High Tech Shield System', 1);
+    addItem('Ancient Star Map', 1);
+    addItem('Strange Substance', 1);
+    addItem('Weapon Fragments', 1);
+    addItem('Shield Recharge', 1);
+    addItem('Hull Repair Nanites', 1);
+  } else if (command == 'sub everything') {
+    removeItem('Scrap', 1);
+    removeItem('Alien Relic', 1);
+    removeItem('Valuable Ores', 1);
+    removeItem('High Tech Weapon System', 1);
+    removeItem('High Tech Shield System', 1);
+    removeItem('Ancient Star Map', 1);
+    removeItem('Strange Substance', 1);
+    removeItem('Weapon Fragments', 1);
+    removeItem('Shield Recharge', 1);
+    removeItem('Hull Repair Nanites', 1);
   }
 
   var cmdDown = false;
