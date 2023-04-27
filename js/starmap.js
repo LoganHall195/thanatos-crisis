@@ -302,7 +302,7 @@ function worldSeed(sessionSeed) {
         ) +
         1
     );
-    seed = 0; // Testing
+    //seed = 0; // Testing
     sessionStorage.setItem('seed', seed);
   }
 
@@ -316,7 +316,7 @@ function worldSeed(sessionSeed) {
     'battle',
     'asteroid',
     'battle',
-    'asteroid',
+    'trader',
     'battle',
     'asteroid',
     'battle',
@@ -326,12 +326,12 @@ function worldSeed(sessionSeed) {
     'asteroid',
     'battle',
     'asteroid',
-    'battle',
+    'trader',
     'asteroid',
     'battle',
     'asteroid',
     'battle',
-    'asteroid',
+    'trader',
     'battle',
     'asteroid',
   ]; //11 events
@@ -340,22 +340,22 @@ function worldSeed(sessionSeed) {
     'battle',
     'asteroid',
     'battle',
-    'asteroid',
+    'trader',
     'battle',
     'asteroid',
     'battle',
     'asteroid',
     'battle',
-    'asteroid',
+    'trader',
   ]; //11 events
   var faction4Events = [
     'battle',
-    'asteroid',
+    'trader',
     'battle',
     'asteroid',
     'battle',
     'asteroid',
-    'battle',
+    'trader',
     'asteroid',
     'battle',
     'asteroid',
