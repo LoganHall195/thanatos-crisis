@@ -414,7 +414,7 @@ function checkEvent(planet) {
 
   var event;
 
-  for (i = 1; i < 4; i++) {
+  for (i = 1; i <= 4; i++) {
     var index = eval('faction' + i + 'Planets.indexOf("' + planet + '");');
     //console.log(faction1Planets.indexOf("Aslan"))
     if (index == -1) {
