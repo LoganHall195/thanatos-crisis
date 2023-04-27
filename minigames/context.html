@@ -13,7 +13,7 @@
                 width: 100%;
             }
 
-            #battle, #asteroid{
+            #battle, #asteroid, #trader{
                 display: none;
                 color: white;
             }
@@ -65,7 +65,7 @@
         </div-->
         <div id="battle" class="event">
             <p class="eventTitle">$activeEvent - $activeStatus</p>
-            <div id="battleend" class="begin">
+            <div id="battlebegin" class="begin">
                 <image src="$eventBeginImage"></image>
                 <p> 
                     You arrived at $currentPlanet to find a pirate ship shaking down a small civilian ship. 
@@ -75,7 +75,7 @@
                 <button onclick="openEvent()">Engage</button>
                 <br>
             </div>
-            <div id="battlebegin" class="end">
+            <div id="battleend" class="end">
                 <image src="$eventEndImage"></image>
                 <p>
                     You defeated the pirate! The civilian ship seems to have escaped
@@ -87,7 +87,7 @@
         </div>
         <div id="asteroid" class="event">
             <p class="eventTitle">$activeEvent - $activeStatus</p>
-            <div id="asteroidend"> 
+            <div id="asteroidbegin"> 
                 <image src="$eventBeginImage"></image>
                 <p> 
                     $currentPlanet is preparing to be impacted by a large number of asteroids & 
@@ -98,7 +98,7 @@
                 <button onclick="ignoreEvent()">Leave</button>
                 <br>
             </div>
-            <div id="asteroidbegin">
+            <div id="asteroidend">
                 <image src="$eventEndImage"></image>
                 <p>
                     The governor of $currentPlanet thanks you! His people reward your
@@ -109,6 +109,24 @@
             </div>
         </div>
 
+         <div id="trader" class = 'event'>
+            <p class="eventTitle">$activeEvent - $activeStatus</p>
+            <div id = "traderbegin">
+                <image src="$eventBeginImage"></image>
+                <p>
+                    You have come across a trade vessel!
+                </p>
+                <button onclick="openEvent()">Hail the merchant ship</button>
+                <button onclick="ignoreEvent()">Continue on your journey</button>
+            </div>
+            <div id ="traderend">
+                <image src="$eventEndImage"></image>
+                <p>
+                    The merchant vessel thanks you for your business and swiftly departs
+                </p>
+                <button onclick="closeEvent()">Close</button>
+            </div>
+        </div-->
     </body>
     <script>
         $(window).on('load',function(){ 
@@ -137,6 +155,16 @@
                     console.log("Event status not found");
                 }
             } else if (event=="asteroid"){
+                if (status=="begin"){
+                    document.getElementById(event+"end").style.display="none";
+                } else if (status=="end"){
+                    document.getElementById(event+"begin").style.display="none";
+                } else {
+                    document.getElementById(event+"end").style.display="none";
+                    document.getElementById(event+"begin").style.display="none";
+                    console.log("Event status not found");
+                }
+            } else if (event=="trader"){
                 if (status=="begin"){
                     document.getElementById(event+"end").style.display="none";
                 } else if (status=="end"){

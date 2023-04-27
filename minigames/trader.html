@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      * {
+        box-sizing: border-box;
+        font-size: 20px;
+      }
+
+      html {
+        width: 100%;
+      }
+
+      body {
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        position: absolute;
+      }
+    </style>
+    <title>Table Example</title>
+    <script>
+      var itemString = sessionStorage.getItem('itemList');
+      //console.log('itemString: ' + itemString);
+      var itemList = [];
+      itemList = JSON.parse(itemString);
+      //console.log('list: ' + itemList);
+
+      var invString = sessionStorage.getItem('inventory');
+      var inventory = JSON.parse(invString);
+      //console.log('invString: ' + invString);
+      //console.log(inventory.length);
+
+      // Define arrays for items, quantity, price, quantity2, and adjustedPrice
+      var items = [];
+      var quantity = [];
+      var origQuantity = [];
+      var price = [];
+      var quantity2 = [99, 99, 99, 99, 99, 99];
+      var sellable = [];
+      var total = 0;
+
+      for (let i = 0; i < inventory.length; i++) {
+        console.log(
+          'name: ' + inventory[i].name + ', qty: ' + inventory[i].quantity
+        );
+        items[i] = inventory[i].name;
+        quantity[i] = inventory[i].quantity;
+        origQuantity[i] = inventory[i].quantity;
+        let foundItem = itemList.find(
+          (item) => item.name === inventory[i].name
+        );
+        //console.log(foundItem);
+        if (foundItem.price) {
+          price[i] = foundItem.price;
+          sellable[i] = true;
+        } else {
+          sellable[i] = false;
+          price[i] = '---';
+        }
+        //console.log(price[i]);
+      }
+      // Add fuel to list after all other items
+      items[inventory.length] = 'Fuel';
+      quantity[inventory.length] = parseInt(sessionStorage.getItem('fuel'));
+      origQuantity[inventory.length] = parseInt(sessionStorage.getItem('fuel'));
+      price[inventory.length] = 15;
+      sellable[inventory.length] = true;
+      //console.log(items);
+
+      // Update Quantity in your inventory
+      function transferQuantity(rowIndex) {
+        //console.log('row index: ' + rowIndex);
+        var quantity1 = quantity[rowIndex - 1];
+        //console.log(rowIndex - 1);
+        //console.log('qty1: ' + quantity1);
+        var quantity2Val = quantity2[rowIndex - 1];
+        var itemPrice = price[rowIndex - 1];
+        //console.log('price ' + itemPrice);
+        if (quantity2Val > 0) {
+          quantity[rowIndex - 1] = quantity1 + 1;
+          total -= itemPrice;
+          quantity2[rowIndex - 1] = quantity2Val - 1;
+          //   console.log(
+          //     'new quantity: ' +
+          //       quantity[rowIndex - 1] +
+          //       ', left to buy: ' +
+          //       quantity2[rowIndex - 1]
+          //   );
+          console.log(total);
+          updateTable(rowIndex);
+        }
+        // if (quantity1 < origQuantity[rowIndex - 1]) {
+        //   total = total + parseInt(itemPrice);
+        //   console.log(total);
+        // } else {
+        //   total = total - parseInt(itemPrice);
+        //   console.log(total);
+        // }
+      }
+
+      // Update Quantity in Trader Inventory
+      function transferQuantity2(rowIndex) {
+        var quantity1 = quantity[rowIndex - 1];
+        var quantity2Val = quantity2[rowIndex - 1];
+        var itemPrice = price[rowIndex - 1];
+
+        if (quantity1 > 0) {
+          quantity[rowIndex - 1] = quantity1 - 1;
+          total += itemPrice;
+          console.log(total);
+          quantity2[rowIndex - 1] = quantity2Val + 1;
+          updateTable(rowIndex);
+        }
+      }
+
+      // Function to update the table with new values
+      function updateTable(rowIndex) {
+        document.getElementById('priceTotal').textContent = 'Total: ' + total;
+
+        console.log('money' + parseInt(sessionStorage.getItem('money')));
+        if (parseInt(total) < -parseInt(sessionStorage.getItem('money'))) {
+          document.getElementById('closeInv').disabled = true;
+        } else {
+          document.getElementById('closeInv').disabled = false;
+        }
+        document.getElementById('quantity1-' + rowIndex).innerText =
+          quantity[rowIndex - 1];
+        document.getElementById('quantity2-' + rowIndex).innerText =
+          quantity2[rowIndex - 1];
+      }
+
+      // Function to populate the table with items, quantity, price, quantity2, and adjustedPrice
+      function populateTable() {
+        var tableBody = document.querySelector('#items-table tbody');
+
+        for (var i = 0; i < items.length; i++) {
+          var row = document.createElement('tr');
+          if (sellable[i] == true) {
+            //console.log(price[i]);
+            row.innerHTML = `
+                        <td>${items[i]}</td>
+                        <td id="quantity1-${i + 1}">${quantity[i]}</td>
+                        <td id="price-${i + 1}">${price[i]}</td>
+                        <td><button id="buttonLeft-${
+                          i + 1
+                        }" onclick="transferQuantity(${i + 1})">\<</button></td>
+                        <td><button id="buttonRight-${
+                          i + 1
+                        }"onclick="transferQuantity2(${i + 1})">\></button></td>
+                        <td id="quantity2-${i + 1}">${quantity2[i]}</td>`;
+          } else {
+            row.innerHTML = `
+                        <td>${items[i]}</td>
+                        <td id="quantity1-${i + 1}">${quantity[i]}</td>
+                        <td id="price-${i + 1}">${price[i]}</td>
+                        <td></td>
+                        <td></td>
+                        <td</td> `;
+          }
+
+          tableBody.appendChild(row);
+          //iMax++;
+          //console.log(i);
+        }
+        //tableBody.appendChild(fuelRow);
+      }
+
+      // Call the populateTable function when the page loads
+      window.onload = function () {
+        populateTable();
+        // var table = document.getElementById('items-table');
+        // var row = table.rows[5]; // get the second row (index 1)
+        // var cells = row.cells; // get the cells in the row
+        // for (var i = 0; i < cells.length; i++) {
+        //   var cellContent = cells[i].innerHTML; // get the content of the cell
+        //   console.log('Cell ' + (i + 1) + ' content: ' + cellContent);
+        //}
+      };
+
+      function exit() {
+        var netTotal = parseInt(sessionStorage.getItem('money')) + total;
+        console.log('net total: ' + netTotal);
+        sessionStorage.setItem('money', netTotal);
+        parent.document.getElementById('currencyText').innerHTML = netTotal;
+        parent.document.getElementById('fuelText').innerHTML =
+          quantity[quantity.length - 1];
+
+        for (i = 0; i < items.length - 1; i++) {
+          inventory[i].name = items[i];
+          inventory[i].quantity = quantity[i];
+          console.log(inventory[i]);
+        }
+
+        inventory = inventory.filter((item) => item.quantity !== 0);
+        sessionStorage.setItem('fuel', quantity[quantity.length - 1]);
+        sessionStorage.setItem('inventory', JSON.stringify(inventory));
+        parent.populateGrid(inventory, itemList);
+
+        setTimeout(function () {
+          sessionStorage.setItem('activeStatus', 'end');
+          window.parent.document.getElementById('minigameIframe').src =
+            'minigames/context.html';
+        }, 500);
+      }
+    </script>
+  </head>
+  <body>
+    <table id="items-table" style="color: rgb(255, 255, 255)">
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Your Cargo</th>
+          <th>Price</th>
+          <th>Buy</th>
+          <th>Sell</th>
+          <th>Available to Buy</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <p id="priceTotal" style="color: white">Total: 0</p>
+    <button id="closeInv" onclick="exit()">End Trading</button>
+  </body>
+</html>

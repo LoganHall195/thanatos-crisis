@@ -53,58 +53,72 @@ let itemList = [
     name: 'Scrap',
     description: 'Salvaged scrap from an ship. \r\nCan be sold for Thanite',
     type: 'Sellable Item',
+    price: 10,
   },
   {
     name: 'Alien Relic',
-    description: 'A relic from a different race. Can be sold for Thanite',
-    type: 'Sellable Item',
+    description: 'A relic from a different race.',
+    type: 'Quest Item',
+    price: null,
   },
   {
     name: 'Valuable Ores',
     description:
       'Rare ores sought highly throughout the galaxy. Can be sold for Thanite',
     type: 'Sellable Item',
+    price: 30,
   },
   {
     name: 'High Tech Weapon System',
     description:
       'A higher performance weapon system. If in inventory, player will deal extra damage in battle',
     type: 'Ship Mod',
+    price: 500,
   },
   {
     name: 'High Tech Shield System',
     description:
       'A higher performance shield system. If in inventory, player will have boosted shields in battle',
     type: 'Ship Mod',
+    price: 500,
   },
   {
     name: 'Ancient Star Map',
     description:
       'An ancient map of the galaxy. Shows location of treasure among the stars.',
-    type: 'Star Map',
+    type: 'Quest Item',
+    price: null,
   },
   {
     name: 'Strange Substance',
     description: 'A strange substance of unknown origin',
     type: 'Quest Item',
+    price: null,
   },
   {
     name: 'Weapon Fragments',
     description:
       'Fragments of an ancient and powerful weapon, could come in handy if all fragments are retrieved',
-    type: 'Weapon',
+    type: 'Quest Item',
+    price: null,
   },
   {
     name: 'Shield Recharge',
     description: 'Recharge your shields if they are depleted',
     type: 'Ship Mod',
+    price: 100,
   },
   {
     name: 'Hull Repair Nanites',
     description: "Nanites programmed to repair damage to your ship's hull",
     type: 'Usable Item',
+    price: 100,
   },
 ];
+
+var itemString = JSON.stringify(itemList);
+sessionStorage.setItem('itemList', itemString);
+
 // Player Inventory
 let inventory = [];
 
@@ -202,6 +216,11 @@ function populateGrid(items, list) {
   console.log('invStr: ' + invString);
   if (invString != '') {
     inventory = JSON.parse(invString);
+    // for (i = 0; i < items.length; i++) {
+    //   if (items[i].quantity == 0) {
+    //     items = items.filter(items[i]);
+    //   }
+    // }
     //console.log(inventory[0]);
     document.getElementById('gridContainer').innerHTML = gridContent;
     const gridItems = document.querySelectorAll('.grid-item'); // Define gridItems
@@ -266,6 +285,21 @@ function debug(command) {
       document.getElementById('mask').style.visibility = 'hidden';
     }
   } else if (command == 'battle') {
+    if (
+      document.getElementById('minigameIframe').style.visibility == 'hidden'
+    ) {
+      document.getElementById('minigameIframe').style.visibility = 'visible';
+      document.getElementById('minigameIframe').src = 'minigames/context.html';
+      document.getElementById('mask').style.visibility = 'visible';
+
+      sessionStorage.setItem('activeEvent', command);
+      sessionStorage.setItem('activeStatus', 'begin');
+    } else {
+      document.getElementById('minigameIframe').style.visibility = 'hidden';
+      document.getElementById('minigameIframe').src = '';
+      document.getElementById('mask').style.visibility = 'hidden';
+    }
+  } else if (command == 'trader') {
     if (
       document.getElementById('minigameIframe').style.visibility == 'hidden'
     ) {
